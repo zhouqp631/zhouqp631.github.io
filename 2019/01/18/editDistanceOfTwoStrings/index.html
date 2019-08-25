@@ -426,29 +426,25 @@
 </ol>
 </blockquote>
 <p>Jupyter notebook:  <a href="https://github.com/zhouqp631/DSAinPython/blob/master/edit%20distance%20of%20two%20strings.ipynb" target="_blank" rel="noopener">edit distance of two strings</a></p>
-<br>
-
+<p><br></p>
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">editDistance</span><span class="params">(str1,str2)</span>:</span></span><br><span class="line">    <span class="comment">#异常处理</span></span><br><span class="line">    <span class="keyword">if</span> str1 <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> str2 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span> </span><br><span class="line">    m,n = len(str1),len(str2)</span><br><span class="line">    <span class="comment"># 定义编辑距离</span></span><br><span class="line">    d = [[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(m+<span class="number">1</span>)]</span><br><span class="line">    <span class="comment"># 边界条件</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,m):</span><br><span class="line">        d[i][<span class="number">0</span>] = i</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,n):</span><br><span class="line">        d[<span class="number">0</span>][j] = j</span><br><span class="line">    <span class="comment"># 迭代过程    </span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,m+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> str1[i<span class="number">-1</span>]==str2[j<span class="number">-1</span>]:</span><br><span class="line">                d[i][j] = d[i<span class="number">-1</span>][j<span class="number">-1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                d[i][j] = min(d[i][j<span class="number">-1</span>]+<span class="number">1</span>,    <span class="comment"># 插入</span></span><br><span class="line">                              d[i<span class="number">-1</span>][j]+<span class="number">1</span>,    <span class="comment"># 删除</span></span><br><span class="line">                              d[i<span class="number">-1</span>][j<span class="number">-1</span>]+<span class="number">1</span>)  <span class="comment"># 替换</span></span><br><span class="line">    <span class="keyword">return</span> d[<span class="number">-1</span>][<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
-
 <p>测试</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str1 =<span class="string">'cat'</span></span><br><span class="line">str2 = <span class="string">'mouse'</span></span><br><span class="line">editDistance(str1,str2)</span><br></pre></td></tr></table></figure>
-
 <p><code>Out: 3</code></p>
-<br>
-
+<p><br></p>
 <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>使用动态规划(dynamic programming,DP)，一般DP有两个过程：确定迭代公式和确定边界条件</p>
 <h2 id="确定迭代公式"><a href="#确定迭代公式" class="headerlink" title="确定迭代公式"></a>确定迭代公式</h2><p><code>d[i][j]</code>表示<code>str1[0:i]</code>与<code>str2[0:j]</code>之间的编辑距离，</p>
 <blockquote>
 <p><code>str1[0:i]</code>不包含指标(index)为<code>i</code>的字符。如果<code>str1=&#39;insert&#39;</code>, 则<code>str1[0:3]=&#39;ins&#39;</code></p>
 </blockquote>
-<p>假设已计算出${d[p][q]: 0 \le p \le (i-1),0 \le q \le (j-1) }​$。有如下两种情况：</p>
+<p>假设已计算出$\{d[p][q]: 0 \le p \le (i-1),0 \le q \le (j-1) \}​$。有如下两种情况：</p>
 <ol>
 <li>当前字符相等：<code>str1[i-1]==str2[j-1]</code></li>
 </ol>
 <p>此时，只需要将字符串<code>str1[0:i-1]</code>转换成<code>str2[0:j-1]</code>, 即</p>
 <p><code>d[i][j]=d[i-1][j-1]</code></p>
 <p>比如 $ mouse_{i-1} t\rightarrow mouse_{j-1} \Rightarrow mous_{i-2}  \rightarrow mous_{j-2} ​$</p>
-<ol start="2">
+<ol>
 <li>当前字符不等​：<code>str1[i-1]!=str2[j-1]</code></li>
 </ol>
 <p>此时，就需要使用插入、删除或替换的方式处理</p>
@@ -476,8 +472,7 @@
 </blockquote>
 <p>第2种情况下，<code>d[i][j]</code>取<code>d[i-1][j]+1</code>,<code>d[i][j-1]+1</code>,<code>d[i-1][j-1]+1</code>中最小值。</p>
 <p><code>d[i][j] = min(d[i-1][j]+1,d[i-1][j-1]+1,d[i][j-1]+1)</code></p>
-<br>
-
+<p><br></p>
 <h2 id="边界条件"><a href="#边界条件" class="headerlink" title="边界条件"></a>边界条件</h2><p>当<code>str1=&#39; &#39;</code>时，使用插入将<code>str1</code>变换为<code>str2</code>, <code>d[0][j]=j</code></p>
 <blockquote>
 <p><code>&#39; &#39;</code>变为 <code>cat,</code> 编辑次数为3次</p>
@@ -486,11 +481,10 @@
 <blockquote>
 <p><code>mouse</code>变为<code>&#39; &#39;</code>,编辑次数5次</p>
 </blockquote>
-<br>
+<p><br></p>
+<p><br></p>
+<p><br></p>
 
-<br>
-
-<br>
       
     </div>
     
