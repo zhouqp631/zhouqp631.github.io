@@ -112,13 +112,13 @@
 
 
 
-<meta name="description" content="问题栈是一种先进后出（FILO，First In Last Out）的数据结构。当栈的进栈顺序为$1,2,3,…,n$ 时，问有多少种不同的出栈序列？  分析设$C(n)​$是$n​$个数所有合法出栈序列的个数。 思路1：递归以某个基准数在出栈序列中的顺序来讨论，基准数用$k$表示。$C(n)$可以分解为：  $k​$在最后一个位置。那么$k​$先进栈，最后出栈；其他$n-1​$个元素$12,k-">
+<meta name="description" content="问题栈是一种先进后出（FILO，First In Last Out）的数据结构。当栈的进栈顺序为$1,2,3,…,n$ 时，问有多少种不同的出栈序列？   分析设$C(n)​$是$n​$个数所有合法出栈序列的个数。 思路1：递归以某个基准数在出栈序列中的顺序来讨论，基准数用$k$表示。$C(n)$可以分解为：  $k​$在最后一个位置。那么$k​$先进栈，最后出栈；其他$n-1​$个元素$12,k">
 <meta name="keywords" content="python,algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="卡特兰数-Catalan number">
 <meta property="og:url" content="https://www.zhouqp.xyz/2019/04/12/CatalanNumber/index.html">
 <meta property="og:site_name" content="zqp&#39;s blog">
-<meta property="og:description" content="问题栈是一种先进后出（FILO，First In Last Out）的数据结构。当栈的进栈顺序为$1,2,3,…,n$ 时，问有多少种不同的出栈序列？  分析设$C(n)​$是$n​$个数所有合法出栈序列的个数。 思路1：递归以某个基准数在出栈序列中的顺序来讨论，基准数用$k$表示。$C(n)$可以分解为：  $k​$在最后一个位置。那么$k​$先进栈，最后出栈；其他$n-1​$个元素$12,k-">
+<meta property="og:description" content="问题栈是一种先进后出（FILO，First In Last Out）的数据结构。当栈的进栈顺序为$1,2,3,…,n$ 时，问有多少种不同的出栈序列？   分析设$C(n)​$是$n​$个数所有合法出栈序列的个数。 思路1：递归以某个基准数在出栈序列中的顺序来讨论，基准数用$k$表示。$C(n)$可以分解为：  $k​$在最后一个位置。那么$k​$先进栈，最后出栈；其他$n-1​$个元素$12,k">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005F77ySly1g1zvwv55vjj30ra02v0sn.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005F77ySly1g1zvwv5g3gj30r802t747.jpg">
@@ -126,7 +126,7 @@
 <meta property="og:updated_time" content="2019-04-12T07:35:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="卡特兰数-Catalan number">
-<meta name="twitter:description" content="问题栈是一种先进后出（FILO，First In Last Out）的数据结构。当栈的进栈顺序为$1,2,3,…,n$ 时，问有多少种不同的出栈序列？  分析设$C(n)​$是$n​$个数所有合法出栈序列的个数。 思路1：递归以某个基准数在出栈序列中的顺序来讨论，基准数用$k$表示。$C(n)$可以分解为：  $k​$在最后一个位置。那么$k​$先进栈，最后出栈；其他$n-1​$个元素$12,k-">
+<meta name="twitter:description" content="问题栈是一种先进后出（FILO，First In Last Out）的数据结构。当栈的进栈顺序为$1,2,3,…,n$ 时，问有多少种不同的出栈序列？   分析设$C(n)​$是$n​$个数所有合法出栈序列的个数。 思路1：递归以某个基准数在出栈序列中的顺序来讨论，基准数用$k$表示。$C(n)$可以分解为：  $k​$在最后一个位置。那么$k​$先进栈，最后出栈；其他$n-1​$个元素$12,k">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005F77ySly1g1zvwv55vjj30ra02v0sn.jpg">
 
 
@@ -419,7 +419,8 @@
 
       
         <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>栈是一种先进后出（FILO，First In Last Out）的数据结构。当栈的进栈顺序为$1,2,3,…,n$ 时，问有多少种不同的出栈序列？</p>
-<p><br></p>
+<br>
+
 <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>设$C(n)​$是$n​$个数所有合法出栈序列的个数。</p>
 <h2 id="思路1：递归"><a href="#思路1：递归" class="headerlink" title="思路1：递归"></a>思路1：递归</h2><p>以某个基准数在出栈序列中的顺序来讨论，基准数用$k$表示。$C(n)$可以分解为：</p>
 <ul>
@@ -428,17 +429,8 @@
 <li>$\cdots$</li>
 <li>$k$在第一个位置。那么$k$先进栈，然后马上出栈；其他$n-1$个元素的出栈个数为$C(n-1)$。总的出栈个数为$C(n-1)$。</li>
 </ul>
-<p>令$C(0)=1​$，从有</p>
-<script type="math/tex; mode=display">
-C(n) = \sum_{i=0}^{n-1} C(i)C(n-i)</script><p>参考<a href="https://zhuanlan.zhihu.com/p/56821103" target="_blank" rel="noopener">母函数推卡特兰数通项公式</a><sup><a href="#fn_note1" id="reffn_note1">note1</a></sup>，可得</p>
-<script type="math/tex; mode=display">
-C(n) = \frac{1}{n+1} 
-\begin{pmatrix} 
-2n \\ 
-n
-\end{pmatrix}</script><h2 id="思路2：排列组合"><a href="#思路2：排列组合" class="headerlink" title="思路2：排列组合"></a>思路2：排列组合</h2><p>用$+1$表示进栈，$-1$表示出栈。那么出栈序列$3,2,1$(假设序列为$1,2,3$)的进出栈顺序为</p>
-<script type="math/tex; mode=display">
-+1,+1,+1,-1,-1,-1</script><p>对于$n$个数的序列，共有$n$次进栈($+1$)和$n$次出栈$-1$.</p>
+<p>令$C(0)=1​$，从有<br>$$<br>C(n) = \sum_{i=0}^{n-1} C(i)C(n-i)<br>$$<br>参考<a href="https://zhuanlan.zhihu.com/p/56821103" target="_blank" rel="noopener">母函数推卡特兰数通项公式</a>[^note1]，可得<br>$$<br>C(n) = \frac{1}{n+1}<br>\begin{pmatrix}<br>2n \<br>n<br>\end{pmatrix}<br>$$</p>
+<h2 id="思路2：排列组合"><a href="#思路2：排列组合" class="headerlink" title="思路2：排列组合"></a>思路2：排列组合</h2><p>用$+1$表示进栈，$-1$表示出栈。那么出栈序列$3,2,1$(假设序列为$1,2,3$)的进出栈顺序为<br>$$<br>+1,+1,+1,-1,-1,-1<br>$$<br>对于$n$个数的序列，共有$n$次进栈($+1$)和$n$次出栈$-1$.</p>
 <p>对$+1,-1$这$2n$个数字，对其做排列，我们的目标是找到所有合法的排列(对应合法的出栈顺序)。</p>
 <ol>
 <li><p>总的排列个数为$\begin{pmatrix}<br>2n \<br>n<br>\end{pmatrix}$</p>
@@ -456,65 +448,34 @@ n
 <p>该映射为一一映射，所以不合法个数与 共$n+1$个$+1$, $n-1$个$-1$的全排列个数一样，即，$\begin{pmatrix}<br>2n \<br>n+1<br>\end{pmatrix}$或者$\begin{pmatrix}<br>2n \<br>n-1<br>\end{pmatrix}$.</p>
 </li>
 </ol>
-<p>经过简单的计算，有</p>
-<script type="math/tex; mode=display">
-C(n)=
-\begin{pmatrix} 
-2n \\ 
-n
-\end{pmatrix}-
-\begin{pmatrix} 
-2n \\ 
-n+1
-\end{pmatrix}=
-\frac{1}{n+1} 
-\begin{pmatrix} 
-2n \\ 
-n
-\end{pmatrix}</script><p><br></p>
+<p>经过简单的计算，有<br>$$<br>C(n)=<br>\begin{pmatrix}<br>2n \<br>n<br>\end{pmatrix}-<br>\begin{pmatrix}<br>2n \<br>n+1<br>\end{pmatrix}=<br>\frac{1}{n+1}<br>\begin{pmatrix}<br>2n \<br>n<br>\end{pmatrix}<br>$$</p>
+<br>
+
 <h1 id="一些类似的问题"><a href="#一些类似的问题" class="headerlink" title="一些类似的问题"></a>一些类似的问题</h1><h2 id="合法括号表达式个数"><a href="#合法括号表达式个数" class="headerlink" title="合法括号表达式个数"></a>合法括号表达式个数</h2><p>计算$n$对括号形成的合法括号表达式的个数。</p>
 <p>合法：$(())(), ()()$</p>
 <p>不合法：$((), ())))$</p>
 <p><strong>分析</strong>：将$($看做进栈，将$)​$看做出栈。</p>
-<p><strong>答案</strong>：<script type="math/tex">C(n)=
-\frac{1}{n+1} 
-\begin{pmatrix} 
-2n \\ 
-n
-\end{pmatrix}</script></p>
+<p><strong>答案</strong>：$$C(n)=<br>\frac{1}{n+1}<br>\begin{pmatrix}<br>2n \<br>n<br>\end{pmatrix}$$</p>
 <h3 id="电影购票"><a href="#电影购票" class="headerlink" title="电影购票"></a>电影购票</h3><p>电影票每张50元，如果有$m+n​$个人排队买票，其中$m​$个人各持有50元面值的钞票1张，另外$n(n\le m)​$个人各持有100元面值的钞票1张，而票房没有预备找零．有多少种方法可以将这$m+n​$个人排成一列，顺序购票，使得无需因为等待找零而耽误时间？</p>
 <p><strong>分析</strong>：当手持100元的人买票时，前面至少有一个手持50元的人已经买过票了。把手持50元的人买票看做进栈, 用$+1$表示。把手持100元的人买票看做出栈, 用$-1$表示。从而转化为求解合法出栈方式的问题(当$m=n$时，栈最终为空；当$m&gt;n$时，栈内留下$m-n$个元素。)</p>
-<p><strong>答案</strong>: <script type="math/tex">\begin{pmatrix} 
-m+n \\ 
-m
-\end{pmatrix}-
-\begin{pmatrix} 
-m+n \\ 
-m+1
-\end{pmatrix}</script></p>
+<p><strong>答案</strong>: $$\begin{pmatrix}<br>m+n \<br>m<br>\end{pmatrix}-<br>\begin{pmatrix}<br>m+n \<br>m+1<br>\end{pmatrix}$$</p>
 <h2 id="街区对角线问题"><a href="#街区对角线问题" class="headerlink" title="街区对角线问题"></a><strong>街区对角线问题</strong></h2><p>有一个$n\times n$的网格，需要从左下角走到右上角，每一步均为向上或向右。求不越过对角线的单调路径的个数。<br><img src="http://ww1.sinaimg.cn/large/005F77ySly1g1zvhihv9mj30o80c8q5d.jpg" style="zoom:60%" align="center"></p>
 <p><strong>分析</strong>：从左下角走到右上角，总的步数为$2n$步，其中$n$步向右，$n$步向上。不穿过对角线的走法需要<code>向右走的步数</code>大于等于<code>向上走的步数</code>。将向右看做入栈，用$+1$表示；将向上看做出栈，用$-1$表示。则可以转化为合法出栈方法个数的问题。</p>
-<p><strong>答案</strong>：<script type="math/tex">C(n)=
-\frac{1}{n+1} 
-\begin{pmatrix} 
-2n \\ 
-n
-\end{pmatrix}​</script><sup><a href="#fn_note2" id="reffn_note2">note2</a></sup></p>
+<p><strong>答案</strong>：$$C(n)=<br>\frac{1}{n+1}<br>\begin{pmatrix}<br>2n \<br>n<br>\end{pmatrix}​$$[^note2]</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
 <li><a href="http://lanqi.org/interests/10939/" target="_blank" rel="noopener">卡特兰数 — 计数的映射方法的伟大胜利</a></li>
 <li><a href="https://www.cnblogs.com/wuyuegb2312/p/3016878.html" target="_blank" rel="noopener">从《编程之美》买票找零问题说起，娓娓道来卡特兰数——兼爬坑指南</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/56821103" target="_blank" rel="noopener">用母函数推卡特兰数通项公式</a></li>
 </ul>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<blockquote id="fn_note1">
-<sup>note1</sup>. 错误修改: $\lim<em>{x\rightarrow 0^+} \frac{1-\sqrt{1-4x}}{2x} =\lim</em>{x\rightarrow 0^+} \frac{1}{\sqrt{1-4x}}= 1$  和  $\lim_{x\rightarrow 0^+} \frac{1+\sqrt{1-4x}}{2x} = + \infty $.<a href="#reffn_note1" title="Jump back to footnote [note1] in the text."> &#8617;</a>
-</blockquote>
-<blockquote id="fn_note2">
-<sup>note2</sup>. 不过对角线的走法，也可以从左上部分走。走法要求向上的次数大于等于向右的次数。条数与从对角线下方走一样，所以答案为$2C(n)$。参考<a href="http://www.cnblogs.com/wuyuegb2312/p/3016878.html" target="_blank" rel="noopener">http://www.cnblogs.com/wuyuegb2312/p/3016878.html</a><a href="#reffn_note2" title="Jump back to footnote [note2] in the text."> &#8617;</a>
-</blockquote>
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<p>[^note1]: 错误修改: $\lim_{x\rightarrow 0^+} \frac{1-\sqrt{1-4x}}{2x} =\lim_{x\rightarrow 0^+} \frac{1}{\sqrt{1-4x}}= 1$  和  $\lim_{x\rightarrow 0^+} \frac{1+\sqrt{1-4x}}{2x} = + \infty $.<br>[^note2]: 不过对角线的走法，也可以从左上部分走。走法要求向上的次数大于等于向右的次数。条数与从对角线下方走一样，所以答案为$2C(n)$。参考<a href="http://www.cnblogs.com/wuyuegb2312/p/3016878.html" target="_blank" rel="noopener">http://www.cnblogs.com/wuyuegb2312/p/3016878.html</a></p>
 
       
     </div>

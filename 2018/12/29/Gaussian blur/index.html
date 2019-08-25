@@ -112,13 +112,13 @@
 
 
 
-<meta name="description" content="概念图像的高斯模糊就是图像与高斯权重(高斯核)做卷积。 简单来说，就是把每个像素点变成周围像素点的加权平均。  对比本文展示三种不同软件包tensorflow,opencv,scipy实现高斯模糊的方法。代码见Gaussian blur-tensorflow,opencv,scipy. tensorflow版本可以嵌入到深度学习模型的代码中，方便求导等运算。 opencv 相对scipy方便的多：">
+<meta name="description" content="概念图像的高斯模糊就是图像与高斯权重(高斯核)做卷积。 简单来说，就是把每个像素点变成周围像素点的加权平均。   对比本文展示三种不同软件包tensorflow,opencv,scipy实现高斯模糊的方法。代码见Gaussian blur-tensorflow,opencv,scipy. tensorflow版本可以嵌入到深度学习模型的代码中，方便求导等运算。 opencv 相对scipy方便的多">
 <meta name="keywords" content="Gaussian blur,tensorflow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用tensorflow,opencv,scipy实现高斯模糊">
 <meta property="og:url" content="https://www.zhouqp.xyz/2018/12/29/Gaussian blur/index.html">
 <meta property="og:site_name" content="zqp&#39;s blog">
-<meta property="og:description" content="概念图像的高斯模糊就是图像与高斯权重(高斯核)做卷积。 简单来说，就是把每个像素点变成周围像素点的加权平均。  对比本文展示三种不同软件包tensorflow,opencv,scipy实现高斯模糊的方法。代码见Gaussian blur-tensorflow,opencv,scipy. tensorflow版本可以嵌入到深度学习模型的代码中，方便求导等运算。 opencv 相对scipy方便的多：">
+<meta property="og:description" content="概念图像的高斯模糊就是图像与高斯权重(高斯核)做卷积。 简单来说，就是把每个像素点变成周围像素点的加权平均。   对比本文展示三种不同软件包tensorflow,opencv,scipy实现高斯模糊的方法。代码见Gaussian blur-tensorflow,opencv,scipy. tensorflow版本可以嵌入到深度学习模型的代码中，方便求导等运算。 opencv 相对scipy方便的多">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.s0hungry.com/wp-content/uploads/2017/08/gaus.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005F77ySly1fynn3yextpj30gm0clgmc.jpg">
@@ -131,7 +131,7 @@
 <meta property="og:updated_time" content="2019-01-06T13:38:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用tensorflow,opencv,scipy实现高斯模糊">
-<meta name="twitter:description" content="概念图像的高斯模糊就是图像与高斯权重(高斯核)做卷积。 简单来说，就是把每个像素点变成周围像素点的加权平均。  对比本文展示三种不同软件包tensorflow,opencv,scipy实现高斯模糊的方法。代码见Gaussian blur-tensorflow,opencv,scipy. tensorflow版本可以嵌入到深度学习模型的代码中，方便求导等运算。 opencv 相对scipy方便的多：">
+<meta name="twitter:description" content="概念图像的高斯模糊就是图像与高斯权重(高斯核)做卷积。 简单来说，就是把每个像素点变成周围像素点的加权平均。   对比本文展示三种不同软件包tensorflow,opencv,scipy实现高斯模糊的方法。代码见Gaussian blur-tensorflow,opencv,scipy. tensorflow版本可以嵌入到深度学习模型的代码中，方便求导等运算。 opencv 相对scipy方便的多">
 <meta name="twitter:image" content="http://www.s0hungry.com/wp-content/uploads/2017/08/gaus.jpg">
 
 
@@ -425,82 +425,73 @@
       
         <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>图像的高斯模糊就是图像与高斯权重(高斯核)做卷积。</p>
 <p>简单来说，就是把每个像素点变成周围像素点的加权平均。</p>
-<p><br></p>
+<br>
+
 <h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><p>本文展示三种不同软件包<code>tensorflow,opencv,scipy</code>实现高斯模糊的方法。代码见<a href="https://github.com/zhouqp631/ml_practice/blob/master/ml_practice/Gaussian%20blur-tensorflow%2Copencv%2Cscipy.ipynb" target="_blank" rel="noopener">Gaussian blur-tensorflow,opencv,scipy.</a></p>
 <p><code>tensorflow</code>版本可以嵌入到深度学习模型的代码中，方便求导等运算。</p>
 <p><code>opencv</code> 相对<code>scipy</code>方便的多：灰度图和彩色图可使用同一函数，并且可直接指定高斯核大小。</p>
 <p>几种实现方法的简要对比:</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
 <th></th>
-<th style="text-align:left">灰度图（单通道)</th>
-<th style="text-align:left">彩色图(多通道)</th>
+<th align="left">灰度图（单通道)</th>
+<th align="left">彩色图(多通道)</th>
 <th>备注</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>tensorflow</td>
-<td style="text-align:left">tf.nn.conv2d<sup><a href="#fn_tf" id="reffn_tf">tf</a></sup></td>
-<td style="text-align:left">tf.nn.conv2d</td>
+<td align="left">tf.nn.conv2d[^tf]</td>
+<td align="left">tf.nn.conv2d</td>
 <td>多通道图分别卷积，然后合并</td>
 </tr>
 <tr>
 <td>opencv</td>
-<td style="text-align:left">cv.GaussianBlur<sup><a href="#fn_cv" id="reffn_cv">cv</a></sup></td>
-<td style="text-align:left">cv.GaussianBlur</td>
+<td align="left">cv.GaussianBlur[^cv]</td>
+<td align="left">cv.GaussianBlur</td>
 <td></td>
 </tr>
 <tr>
 <td>scipy</td>
-<td style="text-align:left">filters.gaussian_filter<sup><a href="#fn_filters" id="reffn_filters">filters</a></sup></td>
-<td style="text-align:left">filters.gaussian_filter</td>
+<td align="left">filters.gaussian_filter[^filters]</td>
+<td align="left">filters.gaussian_filter</td>
 <td>多通道图分别卷积，然后合并。核大小只能间接指定。</td>
 </tr>
-</tbody>
-</table>
-</div>
-<p><br></p>
+</tbody></table>
+<br>
+
 <h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p>高斯核的计算分成两步: (1) 计算正态权重 (2) 归一化正态权重得到高斯核。</p>
-<p>正态权重$G$的计算公式</p>
-<script type="math/tex; mode=display">
-G(x,y)=\frac{1}{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}</script><p>其中</p>
+<p>正态权重$G$的计算公式<br>$$<br>G(x,y)=\frac{1}{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}<br>$$<br>其中</p>
 <ul>
 <li>$\sigma$是模糊因子(blurring factor). 越大模糊的越厉害；</li>
 <li>$x$是水平方向上像素点离中心点的距离；</li>
 <li>$y$是竖直方向上像素点离中心点的距离。</li>
 </ul>
-<p>一个$3\times3$的卷积核，假设其中心点坐标为$(x_c,y_c)=(0,0)$, 则其相邻像素点坐标$(x,y)$如下:</p>
-<script type="math/tex; mode=display">
-\begin{bmatrix} (-1,1) & (0,1) & (1,1) \\
-(-1,0) & \color{red}{(0,0)} & (1,0) \\
-(-1,-1) & (0,-1) & (1,-1) 
-\end{bmatrix}</script><p>假设$\sigma=1.5$, 则$G$的计算结果如下:</p>
+<p>一个$3\times3$的卷积核，假设其中心点坐标为$(x_c,y_c)=(0,0)$, 则其相邻像素点坐标$(x,y)$如下:<br>$$<br>\begin{bmatrix} (-1,1) &amp; (0,1) &amp; (1,1) \<br>(-1,0) &amp; \color{red}{(0,0)} &amp; (1,0) \<br>(-1,-1) &amp; (0,-1) &amp; (1,-1)<br>\end{bmatrix}<br>$$</p>
+<p>假设$\sigma=1.5$, 则$G$的计算结果如下:</p>
 <p><img src="http://www.s0hungry.com/wp-content/uploads/2017/08/gaus.jpg" alt="gaus"></p>
 <blockquote>
 <p>image from <a href="http://s0hungry.com/2017/08/29/how-to-program-a-gaussian-blur-without-using-3rd-party-libraries/" target="_blank" rel="noopener">How to program a Gaussian Blur without using 3rd party libraries</a></p>
 </blockquote>
-<p>对$G$做归一化，可得高斯核$K​$为(保留2位小数):</p>
-<script type="math/tex; mode=display">
-\begin{align}
-K &= G/sum(G)=G/0.48 \\
-&=
-\begin{bmatrix} 0.09 & 0.12 & 0.09 \\
-0.12 & \color{red}{0.15} & 0.12 \\
-0.09 & 0.12 & 0.09 
-\end{bmatrix}
-\end{align}</script><p>通用高斯核的python实现</p>
+<p>对$G$做归一化，可得高斯核$K​$为(保留2位小数):<br>$$<br>\begin{align}<br>K &amp;= G/sum(G)=G/0.48 \<br>&amp;=<br>\begin{bmatrix} 0.09 &amp; 0.12 &amp; 0.09 \<br>0.12 &amp; \color{red}{0.15} &amp; 0.12 \<br>0.09 &amp; 0.12 &amp; 0.09<br>\end{bmatrix}<br>\end{align}<br>$$</p>
+<p>通用高斯核的python实现</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gaussian_kernel</span><span class="params">(size=<span class="number">5</span>,sigma=<span class="number">2</span>)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    size: int,一般取为奇数</span></span><br><span class="line"><span class="string">    sigma: blur factor</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    return: (normalized) Gaussian kernel，大小 size*size</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    x_points = np.arange(-(size<span class="number">-1</span>)//<span class="number">2</span>,(size<span class="number">-1</span>)//<span class="number">2</span>+<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">    y_points = x_points[::<span class="number">-1</span>]</span><br><span class="line">    xs,ys = np.meshgrid(x_points,y_points)</span><br><span class="line">    kernel = np.exp(-(xs**<span class="number">2</span>+ys**<span class="number">2</span>)/(<span class="number">2</span>*sigma**<span class="number">2</span>))/(<span class="number">2</span>*np.pi*sigma**<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> kernel/kernel.sum()</span><br></pre></td></tr></table></figure>
+
 <p>可视化高斯核</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.imshow(gaussian_kernel(<span class="number">20</span>,<span class="number">5</span>),cmap=<span class="string">'Reds'</span>)</span><br><span class="line">plt.colorbar()</span><br></pre></td></tr></table></figure>
-<p><img src="http://ww1.sinaimg.cn/large/005F77ySly1fynn3yextpj30gm0clgmc.jpg" style="zoom:50%" align="center"></p>
+
+<img src="http://ww1.sinaimg.cn/large/005F77ySly1fynn3yextpj30gm0clgmc.jpg" style="zoom:50%" align="center">
+
+
+
 <h2 id="灰度图高斯模糊"><a href="#灰度图高斯模糊" class="headerlink" title="灰度图高斯模糊"></a>灰度图高斯模糊</h2><p>将图形与$K$做卷积，得到模糊图。</p>
-<p> <img src="http://ww1.sinaimg.cn/large/005F77ySly1fynn0v3xtzj30lg08qq4s.jpg" style="zoom:60%" align="center/"></p>
+ <img src="http://ww1.sinaimg.cn/large/005F77ySly1fynn0v3xtzj30lg08qq4s.jpg" style="zoom:60%" align="center/">
+
 <h2 id="彩色图-RGB-高斯模糊"><a href="#彩色图-RGB-高斯模糊" class="headerlink" title="彩色图(RGB)高斯模糊"></a>彩色图(RGB)高斯模糊</h2><p>将原图的3个通道分别与高斯核$K$做卷积，得到不同通道的模糊图，然后合并得到最终模糊图。</p>
 <p><img src="http://ww1.sinaimg.cn/large/005F77ySly1fynn0et3gjj30rl08lwjq.jpg" alt></p>
-<p><br></p>
+<br>
+
 <h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="tensorflow"><a href="#tensorflow" class="headerlink" title="tensorflow"></a>tensorflow</h2><h3 id="灰度图"><a href="#灰度图" class="headerlink" title="灰度图"></a>灰度图</h3><ol>
 <li><p>计算<code>kernel</code>的值，然后将其扩展为<code>tensorflow</code>可用的维度</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kernel = gaussian_kernel(size=<span class="number">10</span>,sigma=<span class="number">5</span>)</span><br><span class="line">kernel = kernel[:, :, np.newaxis, np.newaxis] <span class="comment"># height,width, channel_in, channel_out</span></span><br></pre></td></tr></table></figure>
@@ -512,39 +503,36 @@ K &= G/sum(G)=G/0.48 \\
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s = tf.InteractiveSession()</span><br><span class="line">image_batch = image_gray[np.newaxis,:,:,np.newaxis]  <span class="comment"># (batch_size, height, width, channel)</span></span><br><span class="line">blur_imgs = s.run(x_blur,feed_dict=&#123;x:image_batch&#125;)</span><br><span class="line">s.close()</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>可视化结果</p>
-<p><img src="http://ww1.sinaimg.cn/large/005F77ySly1fynnrcjdk3j30up0aoaed.jpg" style="zoom:100%" align="center"></p>
+<img src="http://ww1.sinaimg.cn/large/005F77ySly1fynnrcjdk3j30up0aoaed.jpg" style="zoom:100%" align="center">
+
+
 </li>
 </ol>
 <h3 id="彩色图"><a href="#彩色图" class="headerlink" title="彩色图"></a>彩色图</h3><p>第2步需要将原图分开为单通道图<code>xr,xg,xb</code>, 然后分别做卷积得到<code>xr_blur,xg_blur,xb_blur</code>, 最后合并得到彩色图的模糊图<code>xrgb_blur</code>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = tf.placeholder(tf.float32,shape=(<span class="literal">None</span>,<span class="number">200</span>,<span class="number">300</span>,<span class="number">3</span>))    <span class="comment"># (batch_size, height, width, channel)</span></span><br><span class="line">xr,xg,xb =tf.expand_dims(x[:,:,:,<span class="number">0</span>],<span class="number">-1</span>),tf.expand_dims(x[:,:,:,<span class="number">1</span>],<span class="number">-1</span>),tf.expand_dims(x[:,:,:,<span class="number">2</span>],<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">xr_blur = tf.nn.conv2d(xr, kernel, strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line">xg_blur = tf.nn.conv2d(xg, kernel, strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line">xb_blur = tf.nn.conv2d(xb, kernel, strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line">xrgb_blur = tf.concat([xr_blur,xg_blur,xb_blur],axis=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
 <p>结果:</p>
 <p><img src="http://ww1.sinaimg.cn/large/005F77ySly1fynn36afl8j30uy0ao7cr.jpg" alt></p>
 <h2 id="opencv"><a href="#opencv" class="headerlink" title="opencv"></a>opencv</h2><p>使用<code>cv.GaussianBlur</code>。灰度图和彩色图都使用该函数。</p>
 <p>可以指定高斯核大小及模糊因子大小。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="keyword">as</span> cv</span><br><span class="line"></span><br><span class="line">size = <span class="number">5</span></span><br><span class="line">sigma = <span class="number">5</span></span><br><span class="line">blur = cv.GaussianBlur(image,(size,size),sigma)</span><br></pre></td></tr></table></figure>
+
 <p><img src="http://ww1.sinaimg.cn/large/005F77ySly1fynn2b53avj30up0b27cr.jpg" alt></p>
 <h2 id="scipy"><a href="#scipy" class="headerlink" title="scipy"></a>scipy</h2><p>使用<code>scipy.ndimage.filters.gaussian_filter</code>.</p>
 <p>灰度图可直接使用<code>gaussian_filter</code>, 彩色图需要分别对不同通道做模糊处理。</p>
-<p>该函数通过<code>truncate</code>参数指定高斯核的大小$s$，<code>truncate</code>与$s$和模糊因子$\sigma$的关系是<code>truncate</code>$=(s-3)/ (2\sigma)​$<sup><a href="#fn_解释" id="reffn_解释">解释</a></sup>.</p>
+<p>该函数通过<code>truncate</code>参数指定高斯核的大小$s$，<code>truncate</code>与$s$和模糊因子$\sigma$的关系是<code>truncate</code>$=(s-3)/ (2\sigma)​$<a href="参考https://stackoverflow.com/questions/25216382/gaussian-filter-in-scipy">^解释</a>.</p>
 <p>高斯模糊函数定义为</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gaussian_blur</span><span class="params">(image, sigma=<span class="number">2</span>, size = <span class="number">3</span>)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    image: [h,w,c]</span></span><br><span class="line"><span class="string">    size: 高斯核大小</span></span><br><span class="line"><span class="string">    sigma：模糊因子</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="comment"># compute the truncate using size</span></span><br><span class="line">    t = (((size - <span class="number">1</span>)/<span class="number">2</span>)<span class="number">-0.5</span>)/sigma</span><br><span class="line">    im = np.zeros_like(image)</span><br><span class="line">    channels = image.shape[<span class="number">-1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(channels):</span><br><span class="line">        im[:, :, i] = filters.gaussian_filter(image[:, :, i], sigma,truncate=t)</span><br><span class="line">    <span class="keyword">return</span> im</span><br></pre></td></tr></table></figure>
+
 <p>结果:</p>
 <p><img src="http://ww1.sinaimg.cn/large/005F77ySly1fynn2th1fpj30ur0az16p.jpg" alt></p>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<blockquote id="fn_解释">
-<sup>解释</sup>. 参考<a href="https://stackoverflow.com/questions/25216382/gaussian-filter-in-scipy" target="_blank" rel="noopener">https://stackoverflow.com/questions/25216382/gaussian-filter-in-scipy</a><a href="#reffn_解释" title="Jump back to footnote [解释] in the text."> &#8617;</a>
-</blockquote>
-<blockquote id="fn_tf">
-<sup>tf</sup>. <code>import tensorflow as tf</code><a href="#reffn_tf" title="Jump back to footnote [tf] in the text."> &#8617;</a>
-</blockquote>
-<blockquote id="fn_cv">
-<sup>cv</sup>. <code>import cv2 as cv</code><a href="#reffn_cv" title="Jump back to footnote [cv] in the text."> &#8617;</a>
-</blockquote>
-<blockquote id="fn_filters">
-<sup>filters</sup>. <code>from scipy.ndimage import filters</code><a href="#reffn_filters" title="Jump back to footnote [filters] in the text."> &#8617;</a>
-</blockquote>
+<br>
+
+<br>
+
+<br>
+
+<p>[^tf]: <code>import tensorflow as tf</code><br>[^cv]: <code>import cv2 as cv</code><br>[^filters]: <code>from scipy.ndimage import filters</code></p>
 
       
     </div>

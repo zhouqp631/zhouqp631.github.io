@@ -436,34 +436,44 @@
 </ul>
 <p>这三种访问方式都是深度优先搜索(deep first search, DFS): 沿着某个方向一直访问节点，当到了根节点时(无法继续访问节点)，就返回到某个合适的节点继续沿着该固定方向访问。</p>
 <p>下面二叉树的前序遍历VLR为：<code>[0,1,3,4,2,5,6]</code></p>
-<p><img src="http://ww1.sinaimg.cn/large/005F77ySly1fzdaju1ft1j30ay08xmy2.jpg" style="zoom:70%" align="center/"></p>
+<img src="http://ww1.sinaimg.cn/large/005F77ySly1fzdaju1ft1j30ay08xmy2.jpg" style="zoom:70%" align="center/">
+
 <blockquote>
 <p>From <a href="http://mishadoff.com/blog/dfs-on-binary-tree-array/" target="_blank" rel="noopener">http://mishadoff.com/blog/dfs-on-binary-tree-array/</a></p>
 </blockquote>
 <p>本文用递归和非递归方式实现三种不同的遍历，完整代码见<a href="https://github.com/zhouqp631/DSAinPython/blob/master/binary%20tree%20and%20its%20traverse.ipynb" target="_blank" rel="noopener">binary tree and its traverse</a>。</p>
-<p><br></p>
+<br>
+
 <h1 id="构造树"><a href="#构造树" class="headerlink" title="构造树"></a>构造树</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义节点</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">node</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,val=None)</span>:</span></span><br><span class="line">        self.left = <span class="literal">None</span></span><br><span class="line">        self.right = <span class="literal">None</span></span><br><span class="line">        self.val = val</span><br><span class="line"><span class="comment"># 定义上图中的树</span></span><br><span class="line">r = node(<span class="number">0</span>)</span><br><span class="line">r.left, r.right = node(<span class="number">1</span>),node(<span class="number">2</span>)</span><br><span class="line">r.left.left, r.left.right = node(<span class="number">3</span>),node(<span class="number">4</span>)</span><br><span class="line">r.right.left,r.right.right = node(<span class="number">5</span>),node(<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
-<p><br></p>
+
+<br>
+
 <h1 id="递归方式"><a href="#递归方式" class="headerlink" title="递归方式"></a>递归方式</h1><p>将遍历方式定义为一个函数，然后根据不同遍历的定义写代码。</p>
-<p>比如前序遍历VLR用<code>preorderTraverse(root)</code>表示。那么</p>
-<script type="math/tex; mode=display">
-先访问树的根节点，\\
-然后使用前序遍历递归地访问根节点的左子树，\\
-最后使用前序遍历递归地访问根节点的右子树.</script><p>可以表示为</p>
+<p>比如前序遍历VLR用<code>preorderTraverse(root)</code>表示。那么<br>$$<br>先访问树的根节点，\<br>然后使用前序遍历递归地访问根节点的左子树，\<br>最后使用前序遍历递归地访问根节点的右子树.<br>$$<br>可以表示为</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorderTraverse</span><span class="params">(root)</span>:</span></span><br><span class="line">    访问root的值</span><br><span class="line">    preorderTraverse(root.left) <span class="comment">#前序遍历左子树</span></span><br><span class="line">    preorderTraverse(root.right) <span class="comment">#前序遍历右子树</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="前序遍历VLR"><a href="#前序遍历VLR" class="headerlink" title="前序遍历VLR"></a>前序遍历VLR</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorderTraverse</span><span class="params">(r)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> r <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">if</span> r:</span><br><span class="line">        result += [r.val]</span><br><span class="line">    <span class="keyword">if</span> r.left:</span><br><span class="line">        result += preorderTraverse(r.left)</span><br><span class="line">    <span class="keyword">if</span> r.right:</span><br><span class="line">        result += preorderTraverse(r.right)</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
 <p>输出 </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">preorderTraverse(r)</span><br></pre></td></tr></table></figure>
+
 <p><code>Out:[3, 1, 4, 0, 5, 2, 6]</code></p>
 <h2 id="中序遍历LVR"><a href="#中序遍历LVR" class="headerlink" title="中序遍历LVR"></a>中序遍历LVR</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorderTraverse</span><span class="params">(r)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> r <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">if</span> r.left:</span><br><span class="line">        result += inorderTraverse(r.left)</span><br><span class="line">    <span class="keyword">if</span> r:</span><br><span class="line">        result += [r.val]</span><br><span class="line">    <span class="keyword">if</span> r.right:</span><br><span class="line">        result += inorderTraverse(r.right)</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
 <p>输出 </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inorderTraverse(r)</span><br></pre></td></tr></table></figure>
+
 <p><code>Out:[3, 1, 4, 0, 5, 2, 6]</code></p>
 <h2 id="后序遍历LRV"><a href="#后序遍历LRV" class="headerlink" title="后序遍历LRV"></a>后序遍历LRV</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postorderTraverse</span><span class="params">(r)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> r <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">if</span> r.left:</span><br><span class="line">        result += postorderTraverse(r.left)</span><br><span class="line">    <span class="keyword">if</span> r.right:</span><br><span class="line">        result += postorderTraverse(r.right)</span><br><span class="line">    <span class="keyword">if</span> r:</span><br><span class="line">        result += [r.val]</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
 <p>输出 </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">postorderTraverse(r)</span><br></pre></td></tr></table></figure>
+
 <p><code>Out:[3, 4, 1, 5, 6, 2, 0]</code></p>
-<p><br></p>
+<br>
+
+
+
 <h1 id="非递归方式"><a href="#非递归方式" class="headerlink" title="非递归方式"></a>非递归方式</h1><p>非递归方法比较复杂一些。</p>
 <p>深度优先搜索(DFS)算法是一种使用回溯思想的递归算法: 它首先沿着某方向一直搜索直到无可访问节点，然后通过回溯继续访问其它节点。</p>
 <p>这类过程适合用数据结构中的栈stack来实现。分为如下3个过程：</p>
@@ -473,27 +483,37 @@
 <li>重复此过程，直到堆栈为空。注意，需要标记或者通过逻辑防止二次访问某节点。如果程序处于无限循环中，可检查是否有标记或者逻辑错误。</li>
 </ol>
 <h2 id="前序遍历VLR-1"><a href="#前序遍历VLR-1" class="headerlink" title="前序遍历VLR"></a>前序遍历VLR</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preorderTraverse2</span><span class="params">(r)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> r <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    stack = []</span><br><span class="line">    result = []</span><br><span class="line">    node = r   <span class="comment"># 起始节点</span></span><br><span class="line">    <span class="keyword">while</span> stack <span class="keyword">or</span> node:</span><br><span class="line">        <span class="comment"># 一直访问左子树直到根节点，同时将访问过的节点添加到stack中,</span></span><br><span class="line">        <span class="comment"># 以便回溯时使用</span></span><br><span class="line">        <span class="keyword">while</span> node:</span><br><span class="line">            result.append(node.val)</span><br><span class="line">            stack.append(node)</span><br><span class="line">            node = node.left</span><br><span class="line">        <span class="comment"># 回溯</span></span><br><span class="line">        temp = stack.pop()</span><br><span class="line">        node = temp.right</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
 <p>输出 </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">preorderTraverse2(r)</span><br></pre></td></tr></table></figure>
+
 <p><code>Out:[3, 1, 4, 0, 5, 2, 6]</code></p>
 <h2 id="中序遍历LVR-1"><a href="#中序遍历LVR-1" class="headerlink" title="中序遍历LVR"></a>中序遍历LVR</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorderTraverse2</span><span class="params">(r)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> r <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    stack = []</span><br><span class="line">    result = []</span><br><span class="line">    node = r</span><br><span class="line">    <span class="keyword">while</span> stack <span class="keyword">or</span> node:</span><br><span class="line">        <span class="comment"># 先走到最左的根节点</span></span><br><span class="line">        <span class="keyword">while</span> node:</span><br><span class="line">            stack.append(node)</span><br><span class="line">            node = node.left</span><br><span class="line">        <span class="comment"># 然后开始访问节点的值</span></span><br><span class="line">        temp = stack.pop()</span><br><span class="line">        result.append(temp.val)</span><br><span class="line">        node = temp.right</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
 <p>输出 </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inorderTraverse2(r)</span><br></pre></td></tr></table></figure>
+
 <p><code>Out:[3, 1, 4, 0, 5, 2, 6]</code></p>
 <h2 id="后序遍历LRV-1"><a href="#后序遍历LRV-1" class="headerlink" title="后序遍历LRV"></a>后序遍历LRV</h2><p>将后序遍历LRV,看做VRL的逆。<br>所以，先对做VRL遍历，然后翻转节点列表，得到后序遍历列表。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postorderTraverse2</span><span class="params">(r)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> r <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    stack = []</span><br><span class="line">    result = []</span><br><span class="line">    node = r</span><br><span class="line">    <span class="comment"># VRL</span></span><br><span class="line">    <span class="keyword">while</span> stack <span class="keyword">or</span> node:</span><br><span class="line">        <span class="keyword">while</span> node:</span><br><span class="line">            result.append(node.val)</span><br><span class="line">            stack.append(node)</span><br><span class="line">            node = node.right</span><br><span class="line">        temp = stack.pop()</span><br><span class="line">        node = temp.left</span><br><span class="line">    <span class="comment"># reverse VRL to get LRV</span></span><br><span class="line">    result = result[::<span class="number">-1</span>]</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
 <p>输出 </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">postorderTraverse2(r)</span><br></pre></td></tr></table></figure>
+
 <p><code>Out:[3, 4, 1, 5, 6, 2, 0]</code></p>
-<p><br></p>
+<br>
+
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li>Problem Solving with Algorithms and Data Structures-<a href="http://interactivepython.org/courselib/static/pythonds/Trees/TreeTraversals.html" target="_blank" rel="noopener">6.7. Tree Traversals</a></li>
 <li><a href="http://mishadoff.com/blog/dfs-on-binary-tree-array/" target="_blank" rel="noopener">DFS on Binary Tree Array</a></li>
 <li><a href="https://www.hackerearth.com/zh/practice/algorithms/graphs/depth-first-search/tutorial/" target="_blank" rel="noopener">Depth First Search</a></li>
 </ol>
-<p><br></p>
-<p><br></p>
-<p><br></p>
+<br>
+
+<br>
+
+<br>
+
 
       
     </div>

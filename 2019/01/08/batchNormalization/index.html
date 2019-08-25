@@ -112,13 +112,13 @@
 
 
 
-<meta name="description" content="上一篇标准化-normalization中说到对线性回归模型，当输入特征在各个维度上取值范围相差较大时，可通过对输入标准化(normalization)来加快训练速度。 其中用到的回归模型$y = w_1x_1+w_2 x_2​$可以看做bias为0，激活函数为线性函数的单个神经元模型。  借鉴输入标准化可以加快训练速度的思想，批标准化(Batch-normalization, BN) 通过对深度">
+<meta name="description" content="上一篇标准化-normalization中说到对线性回归模型，当输入特征在各个维度上取值范围相差较大时，可通过对输入标准化(normalization)来加快训练速度。 其中用到的回归模型$y = w_1x_1+w_2 x_2​$可以看做bias为0，激活函数为线性函数的单个神经元模型。       借鉴输入标准化可以加快训练速度的思想，批标准化(Batch-normalization, BN)">
 <meta name="keywords" content="deep learning,batch normalization,keras">
 <meta property="og:type" content="article">
 <meta property="og:title" content="批标准化-batch normalization">
 <meta property="og:url" content="https://www.zhouqp.xyz/2019/01/08/batchNormalization/index.html">
 <meta property="og:site_name" content="zqp&#39;s blog">
-<meta property="og:description" content="上一篇标准化-normalization中说到对线性回归模型，当输入特征在各个维度上取值范围相差较大时，可通过对输入标准化(normalization)来加快训练速度。 其中用到的回归模型$y = w_1x_1+w_2 x_2​$可以看做bias为0，激活函数为线性函数的单个神经元模型。  借鉴输入标准化可以加快训练速度的思想，批标准化(Batch-normalization, BN) 通过对深度">
+<meta property="og:description" content="上一篇标准化-normalization中说到对线性回归模型，当输入特征在各个维度上取值范围相差较大时，可通过对输入标准化(normalization)来加快训练速度。 其中用到的回归模型$y = w_1x_1+w_2 x_2​$可以看做bias为0，激活函数为线性函数的单个神经元模型。       借鉴输入标准化可以加快训练速度的思想，批标准化(Batch-normalization, BN)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005F77ySly1fye5bgtkfcj305u04l3yo.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005F77ySly1fye5ckbf37j30uw04tq2z.jpg">
@@ -128,7 +128,7 @@
 <meta property="og:updated_time" content="2019-01-18T13:57:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="批标准化-batch normalization">
-<meta name="twitter:description" content="上一篇标准化-normalization中说到对线性回归模型，当输入特征在各个维度上取值范围相差较大时，可通过对输入标准化(normalization)来加快训练速度。 其中用到的回归模型$y = w_1x_1+w_2 x_2​$可以看做bias为0，激活函数为线性函数的单个神经元模型。  借鉴输入标准化可以加快训练速度的思想，批标准化(Batch-normalization, BN) 通过对深度">
+<meta name="twitter:description" content="上一篇标准化-normalization中说到对线性回归模型，当输入特征在各个维度上取值范围相差较大时，可通过对输入标准化(normalization)来加快训练速度。 其中用到的回归模型$y = w_1x_1+w_2 x_2​$可以看做bias为0，激活函数为线性函数的单个神经元模型。       借鉴输入标准化可以加快训练速度的思想，批标准化(Batch-normalization, BN)">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005F77ySly1fye5bgtkfcj305u04l3yo.jpg">
 
 
@@ -422,15 +422,26 @@
       
         <p>上一篇<a href="https://zhouqp.xyz/2018/12/18/Normalization/" target="_blank" rel="noopener">标准化-normalization</a>中说到对线性回归模型，当输入特征在各个维度上取值范围相差较大时，可通过对输入标准化(normalization)来加快训练速度。</p>
 <p>其中用到的回归模型$y = w_1x_1+w_2 x_2​$可以看做<code>bias</code>为0，激活函数为线性函数的单个神经元模型。</p>
-<p><img src="http://ww1.sinaimg.cn/large/005F77ySly1fye5bgtkfcj305u04l3yo.jpg" style="zoom:100%" align="center/"></p>
+<img src="http://ww1.sinaimg.cn/large/005F77ySly1fye5bgtkfcj305u04l3yo.jpg" style="zoom:100%" align="center/">
+
+
+
+
+
 <p>借鉴输入标准化可以加快训练速度的思想，批标准化(Batch-normalization, BN) 通过对深度网络每一层每个连接单元标准化来加快网络的训练速度。</p>
 <p>Batch-normalization(BN)来自于文章<a href="https://arxiv.org/pdf/1502.03167.pdf" target="_blank" rel="noopener">Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a> . </p>
 <p><strong>本文希望回答下面几个问题</strong>：</p>
 <p>(1) 批标准化(BN)如何做的？</p>
 <p>(2) BN除加快训练速度外，还有什么优点？</p>
-<p><br></p>
+<br>
+
+
+
+
+
 <h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p>一个多层神经网络模型：</p>
-<p><img src="http://ww1.sinaimg.cn/large/005F77ySly1fye5ckbf37j30uw04tq2z.jpg" style="zoom:50%" align="center/"></p>
+<img src="http://ww1.sinaimg.cn/large/005F77ySly1fye5ckbf37j30uw04tq2z.jpg" style="zoom:50%" align="center/">
+
 <p>其中</p>
 <ul>
 <li>$x$是输入</li>
@@ -438,17 +449,14 @@
 <li>$z$ 为激活函数的输入</li>
 <li>$a$ 为激活函数的输出</li>
 </ul>
-<p><strong>标准化(normalization)</strong> 就是对每层激活函数的输入做标准化。设整个数据集的均值和方差分别为$\mu<em>{}$和$\sigma</em>{}$，那么标准化公式为：</p>
-<script type="math/tex; mode=display">
-\tilde{z} = \frac{z-\mu_{}}{\sigma_{}}.</script><h1 id="批标准化-batch-normalization"><a href="#批标准化-batch-normalization" class="headerlink" title="批标准化(batch-normalization)"></a>批标准化(batch-normalization)</h1><p>但是多数深度学习模型数据量比较大，内存不足以计算整个数据集的均值和方法；或者为在线学习(online learning)，数据动态获取，无法得到整个数据集。</p>
+<p><strong>标准化(normalization)</strong> 就是对每层激活函数的输入做标准化。设整个数据集的均值和方差分别为$\mu_{}$和$\sigma_{}$，那么标准化公式为：<br>$$<br>\tilde{z} = \frac{z-\mu_{}}{\sigma_{}}.<br>$$</p>
+<h1 id="批标准化-batch-normalization"><a href="#批标准化-batch-normalization" class="headerlink" title="批标准化(batch-normalization)"></a>批标准化(batch-normalization)</h1><p>但是多数深度学习模型数据量比较大，内存不足以计算整个数据集的均值和方法；或者为在线学习(online learning)，数据动态获取，无法得到整个数据集。</p>
 <p>对这种情况，就需要用<strong>batch-normalization</strong>： 使用批量数据(样本)的均值和方差替代整体(总体)的均值和方差。</p>
 <blockquote>
 <p>既然是用样本估计总体，batch选的越大，估计值就越准。所以batch选的越大越好。</p>
 </blockquote>
 <p>具体就是使用batch数据的得到的均值和标准差的移动平均值，近似整个数据的均值和标准差。</p>
-<p>另外为了增加网络的表示能力<sup><a href="#fn_表示能力" id="reffn_表示能力">表示能力</a></sup>，对标准化后的数据加了偏移项$\beta$及尺度参数$\gamma$  ($\beta,\gamma$的维数与$\tilde{z}$一样):</p>
-<script type="math/tex; mode=display">
-\hat{z} = \gamma \odot \tilde{z}+\beta</script><p>其中$\odot$是分量与分量的乘积(element-wise product)。</p>
+<p>另外为了增加网络的表示能力[^表示能力]，对标准化后的数据加了偏移项$\beta$及尺度参数$\gamma$  ($\beta,\gamma$的维数与$\tilde{z}$一样):<br>$$<br>\hat{z} = \gamma \odot \tilde{z}+\beta<br>$$<br>其中$\odot$是分量与分量的乘积(element-wise product)。</p>
 <blockquote>
 <p> 问题​(1)​的回答</p>
 </blockquote>
@@ -461,38 +469,26 @@
 </blockquote>
 <p>其中</p>
 <ul>
-<li>$u<em>{bs},\sigma</em>{bs}$与每个batch的数据有关</li>
+<li>$u_{bs},\sigma_{bs}$与每个batch的数据有关</li>
 <li>$\beta,\gamma$作为模型的参数通过误差反向传播求解</li>
-<li>第一个batch数据用$u<em>{bs},\sigma</em>{bs}$，后面每个batch数据用下面描述的$\bar{\mu}^{t}$和$\bar{\sigma}^{t}$。</li>
+<li>第一个batch数据用$u_{bs},\sigma_{bs}$，后面每个batch数据用下面描述的$\bar{\mu}^{t}$和$\bar{\sigma}^{t}$。</li>
 </ul>
 <p>在迭代过程中记录其指数移动平均(exponential moving average)值$\bar{\mu}^{t}$和$\bar{\sigma}^{t}$，用来近似整个数据的均值$\mu$和方差$\sigma$。</p>
 <p>设共迭代$T$步:</p>
-<p>当$t=1$时，</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\bar{\mu}^{1}=\mu_{bs}\\
-\bar{\sigma}^{1}=\sigma_{bs}
-\end{align}</script><p>当$t\ge2$时,</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\bar{\mu}^{t+1} &= \alpha_1  \mu^t_{bs} +(1-\alpha_1) \bar{\mu}^t_{} \tag{1} \\
-\bar{\sigma}^{t+1} &= \alpha_2 \sigma_{bs}^t  +(1-\alpha_2)\bar{\sigma}_{}^t  \tag{2}
-\end{align}</script><p>其中</p>
+<p>当$t=1$时，<br>$$<br>\begin{align}<br>\bar{\mu}^{1}=\mu_{bs}\<br>\bar{\sigma}^{1}=\sigma_{bs}<br>\end{align}<br>$$</p>
+<p>当$t\ge2$时,<br>$$<br>\begin{align}<br>\bar{\mu}^{t+1} &amp;= \alpha_1  \mu^t_{bs} +(1-\alpha_1) \bar{\mu}^t_{} \tag{1} \<br>\bar{\sigma}^{t+1} &amp;= \alpha_2 \sigma_{bs}^t  +(1-\alpha_2)\bar{\sigma}_{}^t  \tag{2}<br>\end{align}<br>$$<br>其中</p>
 <ul>
 <li>$\mu^t_{bs}$-第$t$步迭代一个Batch的平均值；</li>
 <li>$\bar{\mu}^t_{}$-第$t$步迭代模型中使用的均值；</li>
 <li>$0 &lt; \alpha_1&lt; 1$-权重延迟系数。$\alpha_1$越大，过去均值对现在均值影响越小；</li>
 <li>公式(2)与公式(1)类似。</li>
 </ul>
-<p>将最后一步迭代的参数值记为$\mu<em>{train}=\bar{\mu}^{T},\sigma</em>{train}=\bar{\sigma}^{T}$.</p>
+<p>将最后一步迭代的参数值记为$\mu_{train}=\bar{\mu}^{T},\sigma_{train}=\bar{\sigma}^{T}$.</p>
 <p><strong>测试阶段</strong>:</p>
-<p>计算测试集输入$X^{test}$的均值和标准差分别为$\mu<em>{test}$, $\sigma</em>{test}$，则测试过程的均值和方差$\mu,\sigma$取值如下:</p>
-<script type="math/tex; mode=display">
-\begin{align}
-\mu &= \alpha_1 \mu_{test} +(1-\alpha_1) \mu_{train} \\
-\sigma &= \alpha_2 \sigma_{test} +(1-\alpha_2)\sigma_{train} 
-\end{align}</script><p><br></p>
-<h1 id="Internal-Covariate-Shift"><a href="#Internal-Covariate-Shift" class="headerlink" title="Internal Covariate Shift"></a>Internal Covariate Shift</h1><p>文章<a href="https://arxiv.org/pdf/1502.03167.pdf" target="_blank" rel="noopener">Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a> 将各层参数分布不一样而导致激活值(activations)分布不一样的现象定义为Internal Covariate Shift <sup><a href="#fn_Internal Covariate Shift" id="reffn_Internal Covariate Shift">Internal Covariate Shift</a></sup>. </p>
+<p>计算测试集输入$X^{test}$的均值和标准差分别为$\mu_{test}$, $\sigma_{test}$，则测试过程的均值和方差$\mu,\sigma$取值如下:<br>$$<br>\begin{align}<br>\mu &amp;= \alpha_1 \mu_{test} +(1-\alpha_1) \mu_{train} \<br>\sigma &amp;= \alpha_2 \sigma_{test} +(1-\alpha_2)\sigma_{train}<br>\end{align}<br>$$</p>
+<br>
+
+<h1 id="Internal-Covariate-Shift"><a href="#Internal-Covariate-Shift" class="headerlink" title="Internal Covariate Shift"></a>Internal Covariate Shift</h1><p>文章<a href="https://arxiv.org/pdf/1502.03167.pdf" target="_blank" rel="noopener">Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift</a> 将各层参数分布不一样而导致激活值(activations)分布不一样的现象定义为Internal Covariate Shift [^Internal Covariate Shift]. </p>
 <p>为观察Internal Covariate Shift 现象，对cifar10分类问题，使用keras搭建一个CNN模型：12层的网络, 其中有9个卷积层。代码见<a href="https://github.com/zhouqp631/ml_practice/blob/master/ml_practice/bn_test_covariateShift.ipynb" target="_blank" rel="noopener">jupyter notebook</a>。</p>
 <p>因为activations直接与参数有关，所以我们通过可视化参数的分布来说明activation的分布变化。</p>
 <blockquote>
@@ -506,7 +502,8 @@
 <li><p>有批标准化(右图), <code>conv1</code> 与其他卷积层差别较大，其它层权重分布相对比较一致</p>
 </li>
 </ul>
-<p><br></p>
+<br>
+
 <h1 id="其它优点"><a href="#其它优点" class="headerlink" title="其它优点"></a><strong>其它</strong>优点</h1><p>Batch-normalization最大的优点是加快训练速度，除此之外，它还有一些其它的优点:</p>
 <blockquote>
 <p> 问题(2)的回答</p>
@@ -520,15 +517,15 @@
 <blockquote>
 <p><img src="http://ww1.sinaimg.cn/large/005F77ySly1fya3svmrt7j30m2042myw.jpg" alt></p>
 </blockquote>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<blockquote id="fn_Internal Covariate Shift">
-<sup>Internal Covariate Shift</sup>. We define Internal Covariate Shift as the change in the distribution of network activations due to the change in network parameters during training.  来自文章<a href="https://arxiv.org/pdf/1502.03167.pdf" target="_blank" rel="noopener">BN:… by Reducing Internal Covariate Shift</a><a href="#reffn_Internal Covariate Shift" title="Jump back to footnote [Internal Covariate Shift] in the text."> &#8617;</a>
-</blockquote>
-<blockquote id="fn_表示能力">
-<sup>表示能力</sup>. 标准化将网络输入值变换到一定的范围内，限制了网络的表示能力。比如激活函数为Relu时，大部分输入将被限制在$-$3到$3$以内，其它值出现的概率较小。<a href="#reffn_表示能力" title="Jump back to footnote [表示能力] in the text."> &#8617;</a>
-</blockquote>
+<br>
+
+<br>
+
+<br>
+
+
+
+<p>[^Internal Covariate Shift]: We define Internal Covariate Shift as the change in the distribution of network activations due to the change in network parameters during training.  来自文章<a href="https://arxiv.org/pdf/1502.03167.pdf" target="_blank" rel="noopener">BN:… by Reducing Internal Covariate Shift</a><br>[^表示能力]: 标准化将网络输入值变换到一定的范围内，限制了网络的表示能力。比如激活函数为Relu时，大部分输入将被限制在$-$3到$3$以内，其它值出现的概率较小。</p>
 
       
     </div>
