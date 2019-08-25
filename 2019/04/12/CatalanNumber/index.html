@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="python,algorithm,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/self.jpg?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="问题栈是一种先进后出（FILO，First In Last Out）的数据结构。当栈的进栈顺序为$1,2,3,…,n$ 时，问有多少种不同的出栈序列？   分析设$C(n)​$是$n​$个数所有合法出栈序列的个数。 思路1：递归以某个基准数在出栈序列中的顺序来讨论，基准数用$k$表示。$C(n)$可以分解为：  $k​$在最后一个位置。那么$k​$先进栈，最后出栈；其他$n-1​$个元素$12,k">
+<meta name="keywords" content="python,algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="卡特兰数-Catalan number">
+<meta property="og:url" content="https://www.zhouqp.xyz/2019/04/12/CatalanNumber/index.html">
+<meta property="og:site_name" content="zqp&#39;s blog">
+<meta property="og:description" content="问题栈是一种先进后出（FILO，First In Last Out）的数据结构。当栈的进栈顺序为$1,2,3,…,n$ 时，问有多少种不同的出栈序列？   分析设$C(n)​$是$n​$个数所有合法出栈序列的个数。 思路1：递归以某个基准数在出栈序列中的顺序来讨论，基准数用$k$表示。$C(n)$可以分解为：  $k​$在最后一个位置。那么$k​$先进栈，最后出栈；其他$n-1​$个元素$12,k">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005F77ySly1g1zvwv55vjj30ra02v0sn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005F77ySly1g1zvwv5g3gj30r802t747.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005F77ySly1g1zvhihv9mj30o80c8q5d.jpg">
+<meta property="og:updated_time" content="2019-04-12T07:35:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="卡特兰数-Catalan number">
+<meta name="twitter:description" content="问题栈是一种先进后出（FILO，First In Last Out）的数据结构。当栈的进栈顺序为$1,2,3,…,n$ 时，问有多少种不同的出栈序列？   分析设$C(n)​$是$n​$个数所有合法出栈序列的个数。 思路1：递归以某个基准数在出栈序列中的顺序来讨论，基准数用$k$表示。$C(n)$可以分解为：  $k​$在最后一个位置。那么$k​$先进栈，最后出栈；其他$n-1​$个元素$12,k">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005F77ySly1g1zvwv55vjj30ra02v0sn.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.zhouqp.xyz/2019/04/12/CatalanNumber/">
+
+
+
+
+
+  <title>卡特兰数-Catalan number | zqp's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zqp's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.zhouqp.xyz/2019/04/12/CatalanNumber/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="周清平">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/005F77ySly1fy1xa880boj307u09gwek.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zqp's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">卡特兰数-Catalan number</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+		    
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-12T00:00:00+08:00">
+                2019-04-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">code</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>栈是一种先进后出（FILO，First In Last Out）的数据结构。当栈的进栈顺序为$1,2,3,…,n$ 时，问有多少种不同的出栈序列？</p>
+<br>
+
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>设$C(n)​$是$n​$个数所有合法出栈序列的个数。</p>
+<h2 id="思路1：递归"><a href="#思路1：递归" class="headerlink" title="思路1：递归"></a>思路1：递归</h2><p>以某个基准数在出栈序列中的顺序来讨论，基准数用$k$表示。$C(n)$可以分解为：</p>
+<ul>
+<li>$k​$在最后一个位置。那么$k​$先进栈，最后出栈；其他$n-1​$个元素$12,k-1,k+1…,n​$(共$n-1​$个元素)的出栈个数为$C(n-1)​$</li>
+<li>$k$在倒数第二个位置。那么有一个元素比$k$先进栈，共$C(1)$种可能；其他$n-2$个元素的出栈个数为$C(n-2)$。由组合数的乘法原理，得到总的出栈个数为$C(1)*C(n-2)$</li>
+<li>$\cdots$</li>
+<li>$k$在第一个位置。那么$k$先进栈，然后马上出栈；其他$n-1$个元素的出栈个数为$C(n-1)$。总的出栈个数为$C(n-1)$。</li>
+</ul>
+<p>令$C(0)=1​$，从有<br>$$<br>C(n) = \sum_{i=0}^{n-1} C(i)C(n-i)<br>$$<br>参考<a href="https://zhuanlan.zhihu.com/p/56821103" target="_blank" rel="noopener">母函数推卡特兰数通项公式</a>[^note1]，可得<br>$$<br>C(n) = \frac{1}{n+1}<br>\begin{pmatrix}<br>2n \<br>n<br>\end{pmatrix}<br>$$</p>
+<h2 id="思路2：排列组合"><a href="#思路2：排列组合" class="headerlink" title="思路2：排列组合"></a>思路2：排列组合</h2><p>用$+1$表示进栈，$-1$表示出栈。那么出栈序列$3,2,1$(假设序列为$1,2,3$)的进出栈顺序为<br>$$<br>+1,+1,+1,-1,-1,-1<br>$$<br>对于$n$个数的序列，共有$n$次进栈($+1$)和$n$次出栈$-1$.</p>
+<p>对$+1,-1$这$2n$个数字，对其做排列，我们的目标是找到所有合法的排列(对应合法的出栈顺序)。</p>
+<ol>
+<li><p>总的排列个数为$\begin{pmatrix}<br>2n \<br>n<br>\end{pmatrix}$</p>
+</li>
+<li><p>不合法的个数</p>
+<p>不合的排列一定会出现这种情况：从左往右若干项和为$-1$, 该项一定在奇数位置。</p>
+<p><img src="http://ww1.sinaimg.cn/large/005F77ySly1g1zvwv55vjj30ra02v0sn.jpg" alt></p>
+<blockquote>
+<p>共$n$个$+1$，$n$个$-1​$</p>
+</blockquote>
+<p>构造映射：将前$2i+1$项取反(第$2i+1$项为首次出现累加和为$-1$的位置), 结果为<br><img src="http://ww1.sinaimg.cn/large/005F77ySly1g1zvwv5g3gj30r802t747.jpg" alt></p>
+<blockquote>
+<p>共$n+1$个$+1$, $n-1$个$-1$</p>
+</blockquote>
+<p>该映射为一一映射，所以不合法个数与 共$n+1$个$+1$, $n-1$个$-1$的全排列个数一样，即，$\begin{pmatrix}<br>2n \<br>n+1<br>\end{pmatrix}$或者$\begin{pmatrix}<br>2n \<br>n-1<br>\end{pmatrix}$.</p>
+</li>
+</ol>
+<p>经过简单的计算，有<br>$$<br>C(n)=<br>\begin{pmatrix}<br>2n \<br>n<br>\end{pmatrix}-<br>\begin{pmatrix}<br>2n \<br>n+1<br>\end{pmatrix}=<br>\frac{1}{n+1}<br>\begin{pmatrix}<br>2n \<br>n<br>\end{pmatrix}<br>$$</p>
+<br>
+
+<h1 id="一些类似的问题"><a href="#一些类似的问题" class="headerlink" title="一些类似的问题"></a>一些类似的问题</h1><h2 id="合法括号表达式个数"><a href="#合法括号表达式个数" class="headerlink" title="合法括号表达式个数"></a>合法括号表达式个数</h2><p>计算$n$对括号形成的合法括号表达式的个数。</p>
+<p>合法：$(())(), ()()$</p>
+<p>不合法：$((), ())))$</p>
+<p><strong>分析</strong>：将$($看做进栈，将$)​$看做出栈。</p>
+<p><strong>答案</strong>：$$C(n)=<br>\frac{1}{n+1}<br>\begin{pmatrix}<br>2n \<br>n<br>\end{pmatrix}$$</p>
+<h3 id="电影购票"><a href="#电影购票" class="headerlink" title="电影购票"></a>电影购票</h3><p>电影票每张50元，如果有$m+n​$个人排队买票，其中$m​$个人各持有50元面值的钞票1张，另外$n(n\le m)​$个人各持有100元面值的钞票1张，而票房没有预备找零．有多少种方法可以将这$m+n​$个人排成一列，顺序购票，使得无需因为等待找零而耽误时间？</p>
+<p><strong>分析</strong>：当手持100元的人买票时，前面至少有一个手持50元的人已经买过票了。把手持50元的人买票看做进栈, 用$+1$表示。把手持100元的人买票看做出栈, 用$-1$表示。从而转化为求解合法出栈方式的问题(当$m=n$时，栈最终为空；当$m&gt;n$时，栈内留下$m-n$个元素。)</p>
+<p><strong>答案</strong>: $$\begin{pmatrix}<br>m+n \<br>m<br>\end{pmatrix}-<br>\begin{pmatrix}<br>m+n \<br>m+1<br>\end{pmatrix}$$</p>
+<h2 id="街区对角线问题"><a href="#街区对角线问题" class="headerlink" title="街区对角线问题"></a><strong>街区对角线问题</strong></h2><p>有一个$n\times n$的网格，需要从左下角走到右上角，每一步均为向上或向右。求不越过对角线的单调路径的个数。<br><img src="http://ww1.sinaimg.cn/large/005F77ySly1g1zvhihv9mj30o80c8q5d.jpg" style="zoom:60%" align="center"></p>
+<p><strong>分析</strong>：从左下角走到右上角，总的步数为$2n$步，其中$n$步向右，$n$步向上。不穿过对角线的走法需要<code>向右走的步数</code>大于等于<code>向上走的步数</code>。将向右看做入栈，用$+1$表示；将向上看做出栈，用$-1$表示。则可以转化为合法出栈方法个数的问题。</p>
+<p><strong>答案</strong>：$$C(n)=<br>\frac{1}{n+1}<br>\begin{pmatrix}<br>2n \<br>n<br>\end{pmatrix}​$$[^note2]</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://lanqi.org/interests/10939/" target="_blank" rel="noopener">卡特兰数 — 计数的映射方法的伟大胜利</a></li>
+<li><a href="https://www.cnblogs.com/wuyuegb2312/p/3016878.html" target="_blank" rel="noopener">从《编程之美》买票找零问题说起，娓娓道来卡特兰数——兼爬坑指南</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/56821103" target="_blank" rel="noopener">用母函数推卡特兰数通项公式</a></li>
+</ul>
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<p>[^note1]: 错误修改: $\lim_{x\rightarrow 0^+} \frac{1-\sqrt{1-4x}}{2x} =\lim_{x\rightarrow 0^+} \frac{1}{\sqrt{1-4x}}= 1$  和  $\lim_{x\rightarrow 0^+} \frac{1+\sqrt{1-4x}}{2x} = + \infty $.<br>[^note2]: 不过对角线的走法，也可以从左上部分走。走法要求向上的次数大于等于向右的次数。条数与从对角线下方走一样，所以答案为$2C(n)$。参考<a href="http://www.cnblogs.com/wuyuegb2312/p/3016878.html" target="_blank" rel="noopener">http://www.cnblogs.com/wuyuegb2312/p/3016878.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/10/matrixProduct/" rel="next" title="矩阵连乘最小计算次数">
+                <i class="fa fa-chevron-left"></i> 矩阵连乘最小计算次数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/27/passProbability/" rel="prev" title="通过概率">
+                通过概率 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+	  <div>    
+		 
+		 
+		<ul class="post-copyright">
+		  <li class="post-copyright-author">
+			  <strong>本文作者：</strong>周清平
+		  </li>
+		  <li class="post-copyright-link">
+			<strong>本文链接：</strong>
+			<a href="/2019/04/12/CatalanNumber/" title="卡特兰数-Catalan number">2019/04/12/CatalanNumber/</a>
+		  </li>
+		  <li class="post-copyright-license">
+			<strong>版权： </strong>
+			本站文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议，请勿用于商业，转载注明出处！
+		  </li>
+		</ul>
+		
+	</div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="http://ww1.sinaimg.cn/large/005F77ySly1fy1xa880boj307u09gwek.jpg" alt="周清平">
+          <p class="site-author-name" itemprop="name">周清平</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.linkedin.com/in/%E6%B8%85%E5%B9%B3-%E5%91%A8-690aa0184/" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                    
+                      LinkedIn
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:714781770@qq.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      Email
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhouqp631?utf8=%E2%9C%93&tab=repositories&q=&type=source&language=" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://scholar.google.com/citations?user=qTwd1aEAAAAJ&hl=zh-CN" target="_blank" title="Scholar">
+                  
+                    <i class="fa fa-fw fa-google"></i>
+                  
+                    
+                      Scholar
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses.html" title="Hung-yi Lee" target="_blank">Hung-yi Lee</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路1：递归"><span class="nav-number">2.1.</span> <span class="nav-text">思路1：递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路2：排列组合"><span class="nav-number">2.2.</span> <span class="nav-text">思路2：排列组合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些类似的问题"><span class="nav-number">3.</span> <span class="nav-text">一些类似的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#合法括号表达式个数"><span class="nav-number">3.1.</span> <span class="nav-text">合法括号表达式个数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#电影购票"><span class="nav-number">3.1.1.</span> <span class="nav-text">电影购票</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#街区对角线问题"><span class="nav-number">3.2.</span> <span class="nav-text">街区对角线问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2018 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-globe"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">周清平</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  <!-- 代码块复制功能 -->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>

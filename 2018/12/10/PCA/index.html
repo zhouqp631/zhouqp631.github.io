@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="dimension reduction,PCA,principal component analysis,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/self.jpg?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="问题描述某些高维空间的数据可以嵌入或者近似嵌入在低维空间中。  例子：$\mathbb{R}^2$空间的数据点${(1,1),(2,2),…,(5,5)}$可以看做$\mathbb{R}^1$空间的点${1,2,..,5}$  我们的目的是将一些数据点${x_1,x_2,…,x_N} , x_i \in \mathbb{R}^p$ 变换成${y_1,y_2,…,y_N} , x_i \in \ma">
+<meta name="keywords" content="dimension reduction,PCA,principal component analysis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="主成分分析-principal component analysis">
+<meta property="og:url" content="https://www.zhouqp.xyz/2018/12/10/PCA/index.html">
+<meta property="og:site_name" content="zqp&#39;s blog">
+<meta property="og:description" content="问题描述某些高维空间的数据可以嵌入或者近似嵌入在低维空间中。  例子：$\mathbb{R}^2$空间的数据点${(1,1),(2,2),…,(5,5)}$可以看做$\mathbb{R}^1$空间的点${1,2,..,5}$  我们的目的是将一些数据点${x_1,x_2,…,x_N} , x_i \in \mathbb{R}^p$ 变换成${y_1,y_2,…,y_N} , x_i \in \ma">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005F77ySly1fy1r03i6a5g30zl0cmx6s.gif">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005F77ySly1fy1r4ro8m6j30lt0ipgsj.jpg">
+<meta property="og:updated_time" content="2019-01-06T13:57:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="主成分分析-principal component analysis">
+<meta name="twitter:description" content="问题描述某些高维空间的数据可以嵌入或者近似嵌入在低维空间中。  例子：$\mathbb{R}^2$空间的数据点${(1,1),(2,2),…,(5,5)}$可以看做$\mathbb{R}^1$空间的点${1,2,..,5}$  我们的目的是将一些数据点${x_1,x_2,…,x_N} , x_i \in \mathbb{R}^p$ 变换成${y_1,y_2,…,y_N} , x_i \in \ma">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005F77ySly1fy1r03i6a5g30zl0cmx6s.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.zhouqp.xyz/2018/12/10/PCA/">
+
+
+
+
+
+  <title>主成分分析-principal component analysis | zqp's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zqp's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.zhouqp.xyz/2018/12/10/PCA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="周清平">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/005F77ySly1fy1xa880boj307u09gwek.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zqp's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">主成分分析-principal component analysis</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+		    
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-10T00:00:00+08:00">
+                2018-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">machine learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>某些高维空间的数据可以嵌入或者近似嵌入在低维空间中。</p>
+<blockquote>
+<p>例子：$\mathbb{R}^2$空间的数据点${(1,1),(2,2),…,(5,5)}$可以看做$\mathbb{R}^1$空间的点${1,2,..,5}$</p>
+</blockquote>
+<p>我们的目的是将一些数据点${x_1,x_2,…,x_N} , x_i \in \mathbb{R}^p$ 变换成${y_1,y_2,…,y_N} , x_i \in \mathbb{R}^q$，其中$q \le p$,  另外要求${y_1,y_2,…,y_N}$的样本协方差矩阵是对角阵。</p>
+<p>随机变量才有方差或者协方差，在下面的推导中，我们</p>
+<ul>
+<li>将${x_1, x_2, …, x_N}, x_i \in \mathbb{R}^p$ 理解为来自随机变量$x$的样本</li>
+<li>将${y_1, y_2, …, y_N}, y_i \in \mathbb{R}^q$ 理解为来自随机变量$y$的样本</li>
+</ul>
+<blockquote>
+<p>$x$的(总体)均值和(总体)协方差分别用$Ex$和$Var(x)=cov(x,x)$表示。</p>
+<p>$x$的样本均值和样本协方差分别用$\bar x =\frac{1}{N}\sum_{n=1}^N x_n$和$\frac{1}{N}\sum_{n=1}^N(x_n-\bar x)(x_n-\bar x)^T$表示。</p>
+</blockquote>
+<br>
+
+
+
+<h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><p>高维空间的点，可以通过投影得到低维空间的点。</p>
+<p>考虑投影到一维空间${ ku_1|k \in \mathbb{R}，u_1 \in \mathbb{R}^p }$，我们希望投影数据能包含原始数据更多的信息。</p>
+<p><strong>信息的度量就等于不确定性的多少, 具体可以用熵(entropy)来量化, 熵越大表示信息越多</strong>[^智能时代]。</p>
+<p>假设投影数据服从正太分布 $N(\mu,\sigma^2)$, 其熵(entropy)为 $\frac{1}{2} \ln(2\pi e \sigma^2)$.</p>
+<p>从而，分布的方差$\sigma^2$越大，熵也就越大，包含的信息也就越多。</p>
+<p>所以，我们需要<strong>选择投影数据方差最大的方向</strong>$u_1$。</p>
+<blockquote>
+<p>另一种理解方式是最小化投影误差(projection error minimization)[^PRML].</p>
+</blockquote>
+<br>
+
+
+
+<h1 id="计算过程"><a href="#计算过程" class="headerlink" title="计算过程"></a>计算过程</h1><p>先分析最简单的情形: 把数据投影到一维空间，然后将一维情形得到的结果推广到高维空间。</p>
+<h2 id="投影到一维-mathbb-R-p-Rightarrow-mathbb-R-1"><a href="#投影到一维-mathbb-R-p-Rightarrow-mathbb-R-1" class="headerlink" title="投影到一维: $\mathbb{R}^p \Rightarrow\mathbb{R}^1$"></a>投影到一维: $\mathbb{R}^p \Rightarrow\mathbb{R}^1$</h2><p>因为投影数据的方差只与$u_1$的方向有关，而与其大小无关。</p>
+<p>所以为了便于计算，我们限制$u_1$为单位向量，即$u_1^T u_1=1$。</p>
+<ol>
+<li><p>计算${x_1,x_2,…,x_N} $投影在$u_1$上的投影${y_1,y_2,…,y_N} $。<br>$x_n$在$u_1$上投影为:<br>$$<br>y_n = \frac{u_1^T x_n}{u_1^T u_1} = u_1^T x_n<br>$$</p>
+</li>
+<li><p>计算投影数据 ${y_1,y_2,…,y_N}$的方差：</p>
+<p>$$<br>\begin{align}<br>Var(y) &amp;= E(y-Ey)^2 \<br>​    &amp;\approx \frac{1}{N}\sum_{n=1}^N(u_1^Tx_n - u_1^T \bar{x})^2 \leftarrow \bar{x}=\frac{1}{N} \sum_{n=1}^N x_n \<br>​    &amp;=\frac{1}{N}\sum_{n=1}^N (u_1^Tx_n - u_1^T \bar{x})(u_1^Tx_n - u_1^T \bar{x}) \<br>​    &amp;= \frac{1}{N}\sum_{n=1}^N (u_1^Tx_n - u_1^T \bar{x})(u_1^Tx_n - u_1^T \bar{x})^T \leftarrow a=a^T \text{ if a is a scaler} \<br>​    &amp;= u_1^T \left[ \frac{1}{N}\sum_{n=1}^N (x_n - \bar{x})(x_n -  \bar{x})^T \right]u_1  \leftarrow S=\frac{1}{N}\sum_{n=1}^N (x_n - \bar{x})(x_n -  \bar{x})^T \<br>​    &amp;=u_1^T S u_1 </p>
+<p>\end{align}<br>$$<br>上式中$S$是${x_1,x_2,…,x_N} $的样本协方差矩阵。</p>
+</li>
+<li><p>最大化方差，求解$u_1$</p>
+<p>目标函数：<br>$$<br>\max_{u_1} \qquad  u_1^T S u_1 \</p>
+<pre><code>\quad \text{s.t.} \qquad u_1^T u_1=1</code></pre><p>$$<br>这是一个<strong>有限制条件的优化问题</strong>，可以通过<strong>拉格朗日乘子法</strong>将其转化为无约束优化问题：<br>$$<br>\max_{u_1} \quad  F(u_1)=u_1^T S u_1 +\lambda_1 (1- u_1^T u_1).$F(u_1)$取到最大值满足的条件：<br>$$<br>$F(u_1)$取到最大值满足的条件：<br>$$<br>\begin{align}<br>   \frac{\partial F(u_1) }{\partial u_1} &amp;= 2Su_1-2\lambda_1 u_1=0 \<br>   1- u_1^T u_1&amp;=0<br>\end{align}<br>$$<br>从而，解$u_1$就是$S$的最大特征值$\lambda_1$对应的特征向量。此时，$F(u_1)=\lambda_1$.</p>
+</li>
+</ol>
+<p>$u_1​$称为第一主成分(first principal component), 记为pc1。得到的一维空间 $\mathbb{R}^1 = { ku_1|k \in \mathbb{R}，u_1 \in \mathbb{R}^p }​$称为第一主子空间(first principal subspace)。</p>
+<p><strong>结果:</strong> </p>
+<ul>
+<li><p>投影矩阵为$u_1^T$，投影数据为 $y_i = u_1^Tx_i  \in \mathbb{R}^1 \qquad i =1,2,…,N$;</p>
+</li>
+<li><p>$y = u_1^Tx  \in \mathbb{R}^1$，其方差为 $\lambda_1$。</p>
+</li>
+</ul>
+<h2 id="投影到多维-mathbb-R-p-Rightarrow-mathbb-R-q-2-le-q-le-p"><a href="#投影到多维-mathbb-R-p-Rightarrow-mathbb-R-q-2-le-q-le-p" class="headerlink" title="投影到多维: $\mathbb{R}^p\Rightarrow\mathbb{R}^q(2\le q\le p)$"></a>投影到多维: $\mathbb{R}^p\Rightarrow\mathbb{R}^q(2\le q\le p)$</h2><p>当$p=1$时, 我们已经说明了保持方差最大的投影方向是$S$的最大特征值$\lambda_1$对应特征向量$u_1$的方向。</p>
+<p>当$p=M$时, 假设保持方差最大的投影方向依次是$S$的前$M$个特征值$\lambda_1 \ge \lambda_2 \ge …\ge\lambda_M$对应的特征向量$u_1,u_2,…,u_M$的方向。</p>
+<blockquote>
+<ul>
+<li><p>$u_1,u_2,…,u_M$分别是 第一主成分(first principal component), …,第M个主成分(M-th principal component). 记为pc1,pc2,…,pcM.</p>
+</li>
+<li><p>$u_1,u_2,…,u_M$构成的空间$\mathbb{R}^M = { k_1u_1+…+k_M u_M|k_i \in \mathbb{R}，u_i \in \mathbb{R}^p}$称为M维主子空间(M dimensional principal subspace)。</p>
+</li>
+</ul>
+</blockquote>
+<p>现证明$p=M+1$时，结论仍然成立。</p>
+<p>此时，优化的目标函数为：<br>$$<br>\max_{u_{M+1}} \qquad  u_{M+1}^T S u_{M+1}<br>$$<br>约束条件($u_{M+1}^T$为单位向量且与前$M$个主成分正交)为:<br>$$<br>\begin{align}<br>u_{M+1}^T u_{M+1}&amp;=1 \quad i=1,2,…,M\<br> u_{M+1}^T u_i&amp;=0 \quad i=1,2,…,M<br> \end{align}<br>$$<br>同样，这是一个<strong>有限制条件的优化问题</strong>，可以通过<strong>拉格朗日乘子法</strong>将其转化为无约束优化问题：</p>
+<p>$$<br>\max_{u_{M+1}} \quad  F(u_{M+1})=u_{M+1}^T S u_{M+1}+\lambda_{M+1} (1- u_{M+1}^T u_{M+1})+\sum_{i=1}^M \eta_i u_{M+1}^T u_i.<br>$$<br>$F(u_{M+1})$取到最大值满足的条件：<br>$$<br>\begin{align}<br>\frac{\partial F(u_{M+1}) }{\partial u_{M+1}} &amp;= 2Su_{M+1}-2\lambda u_{M+1}+\sum_{i=1}^M \eta_i u_i =0  \tag{1}\<br>1- u_{M+1}^T u_{M+1}&amp;=0 \<br> u_{M+1}^T u_{i}&amp;=0   \quad  \text{i=1,2,…,M}<br>\end{align}<br>$$<br>在公式(1)上乘以$u_{j}^T, j \in {1,2,…,M}$, 得到:</p>
+<blockquote>
+<ul>
+<li>$u_{j}^Tu_{M+1}=0$.</li>
+<li>$j=i$时，$ u_{j}^Tu_i = 1 $；否则$ u_{j}^Tu_i = 0$.</li>
+<li>$S$是样本协方差矩阵，是对称的。$S^T=S$.</li>
+<li>$u_{j}^TSu_{M+1}$ 是一个标量，所以$u_{j}^TSu_{M+1}=(u_{j}^TSu_{M+1})^T=u_{M+1}^TSu_j =\lambda_i u_{M+1}^T  u_j$.</li>
+</ul>
+</blockquote>
+<p>$$<br>\begin{align}<br>0&amp;=2u_{j}^TSu_{M+1}-2\lambda u_{j}^Tu_{M+1}+\sum_{i=1}^M \eta_i u_{j}^Tu_i \<br>&amp;=2u_{M+1}^TSu_j-0+\eta_j  \leftarrow Su_j=\lambda_j u_j \<br>&amp;=2\lambda_j u_{M+1}^Tu_j-0+\eta_j  \<br>&amp;= 0+\eta_j\<br>&amp;=\eta_j</p>
+<p>\end{align}<br>$$</p>
+<p>将$\eta_j=0$代入公式(1)，得到$Su_{M+1}=\lambda u_{M+1}$. </p>
+<p>因为前$M$个最大的特征值已经使用过，所以只能选择第$M+1$大的特征值$\lambda_{M+1}$及其对于的特征向量$u_{M+1}$. </p>
+<p>从而第$M+1$个主成分为$u_{M+1}$。</p>
+<p>$M+1$维主子空间($M+1$ dimensional principal subspace) 为$$\mathbb{R}^{M+1} = { k_1u_1+…+k_M u_M+k_{M+1}u_{M+1}|k_i \in \mathbb{R}，u_i \in \mathbb{R}^p}$$.</p>
+<p>上面使用<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95" target="_blank" rel="noopener">数学归纳法</a>证明了数据${x_1,x_2,…,x_N} , x_i \in \mathbb{R}^p$的$q$维主子空间($q$ dimensional principal subspace), 由数据的样本协方差矩阵$S=\frac{1}{N}\sum_{n=1}^N (x_n - \bar{x})(x_n -  \bar{x})^T$的前$q$个依次减小的最大特征值$\lambda_1 \ge … \ge \lambda_q$对应的特征向量$u_1,…,u_q$构成。</p>
+<p><strong>结果</strong>：</p>
+<ul>
+<li>变换矩阵为$U^T$, 投影数据为:</li>
+</ul>
+<p>$$<br>y_i =<br>\left[<br> \begin{matrix}<br>   u_1^T x_i \<br>   \cdots \<br>   u_{q}^T x_i<br>  \end{matrix}<br>  \right]<br>  = U^Tx_i \in \mathbb{R}^q  \qquad i=1,2,…,N;<br>$$</p>
+<ul>
+<li>$y=U^Tx$, $y$的协方差矩阵为:</li>
+</ul>
+<p>$$<br>\begin{align}<br>Var(y)&amp;=cov(y,y) = cov(U^Tx,U^Tx)  \<br>&amp;=U^Tcov(x,x)U = U^T S U\<br>&amp;=<br>\left[<br> \begin{matrix}<br>   u_1^T  \<br>   \cdots \<br>   u_{q}^T<br>  \end{matrix}<br>  \right]<br>  S<br>  \left[<br>   \begin{matrix}<br>   u_1 &amp; \cdots &amp;u_{q}<br>  \end{matrix}<br>  \right]\<br>  &amp;=<br>   \left[<br> \begin{matrix}<br>    u_1^TSu_1 &amp; \cdots &amp;  u_1^T S u_q \<br>     &amp; \cdots &amp;   \<br>     u_q^T S u_1 &amp; \cdots &amp;  u_q^T S u_q<br>  \end{matrix}<br>  \right] \<br>  &amp;=<br>     \left[<br> \begin{matrix}<br>    \lambda_1 &amp; 0 &amp;  0 \<br>     &amp; \cdots &amp;   \<br>     0 &amp; 0 &amp;  \lambda_q<br>  \end{matrix}<br>  \right].<br>\end{align}<br>$$</p>
+<br>
+
+<h1 id="一句话描述"><a href="#一句话描述" class="headerlink" title="一句话描述"></a>一句话描述</h1><p>对随机变量$x \in \mathbb{R}^p $, 寻找一个线性变换$y_{q \times 1}=W_{q\times p}x_{p \times 1}   \in \mathbb{R}^q$, 使得变换后随机变量$y$的协方差矩阵是对角阵。</p>
+<p>具体：设${x_1,x_2,…,x_N} $为来自随机变量总体$x$的样本，其样本协方差矩阵为$S=\frac{1}{N}\sum_{n=1}^N (x_n - \bar{x})(x_n -  \bar{x})^T$</p>
+<p>$S$的特征值和特征向量关系：$S_{p\times p}U_{p \times q}=U_{p \times q}\Lambda_{q \times q}$</p>
+<p>其中</p>
+<ul>
+<li>$\Lambda$的对角元素为$S$的特征值，$\Lambda=\mathrm{diag}[\lambda_1..,\lambda_p]，\lambda_1\ge \lambda_2\ge… \lambda_p $；</li>
+<li>$U$的相应列对应于$S$的特征向量, 分别称为第一、第二…第$p$个主成分。</li>
+</ul>
+<p>此时，$W=U^T$.  即， $y=U^Tx$.</p>
+<br>
+
+<h1 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h1><p>下面两个例子主要用来展示PCA降维的作用。</p>
+<blockquote>
+<p><a href="http://cs229.stanford.edu/syllabus.html" target="_blank" rel="noopener">CS229: Machine Learning</a>. Lecture 15-Principal Component Analysis. </p>
+<p>分析了PCA的几个主要作用：</p>
+<ol>
+<li>压缩(compression)-使用投影后的低维数据替代原始数据，用来聚类等；</li>
+<li>降维(dimension reduce)-使用投影后的低维数据作为机器学习模型(线性回归，逻辑回归)的输入, 减少模型参数的个数，从而降低模型的复杂度，降低模型的方差(variance),  达到避免过拟合(overfitting)的目的；</li>
+<li>去噪(noise reduction)-大特征值对应的主成分子空间表示主要的特征，而小特征值对应的主成分子空间表示次要的特征(在某些情形下, 就是噪音)。所以保留高特征值对应的主子空间的特征就达到了去除噪音的目的。</li>
+</ol>
+</blockquote>
+<h2 id="三维空间数据"><a href="#三维空间数据" class="headerlink" title="三维空间数据"></a>三维空间数据</h2><p><strong>左</strong>：原始数据       $\qquad \qquad \quad  \quad$     <strong>中</strong>：原始数据在第一主成分pc1和第二主成分pc2的投影</p>
+<p><strong>右上</strong>：原始数据取值范围        $\qquad $     <strong>右下</strong>：投影数据取值范围</p>
+<p><img src="http://ww1.sinaimg.cn/large/005F77ySly1fy1r03i6a5g30zl0cmx6s.gif" alt="pca3d"></p>
+<blockquote>
+<p>image comes from  <a href="http://setosa.io/ev/principal-component-analysis/" target="_blank" rel="noopener">http://setosa.io/ev/principal-component-analysis/</a></p>
+</blockquote>
+<p>可从得到的结论：</p>
+<ul>
+<li><p>PCA可以理解为坐标系的变换;</p>
+</li>
+<li><p>原始数据在各个主成分投影的方差：pc1最大，pc2次之，pc3最小。</p>
+</li>
+</ul>
+<h2 id="MNIST数据集"><a href="#MNIST数据集" class="headerlink" title="MNIST数据集"></a>MNIST数据集</h2><p>MNIST是$28\times28$的图片，转化为向量后，每一张图片是空间$\mathbb{R}^{784}$上的点。</p>
+<p>对该数据集做PCA，将其投影到二维主成分空间，结果如下图：</p>
+<p>`<img src="http://ww1.sinaimg.cn/large/005F77ySly1fy1r4ro8m6j30lt0ipgsj.jpg" style="zoom:60%"></p>
+<blockquote>
+<p>​           image comes from <a href="https://projector.tensorflow.org/" target="_blank" rel="noopener">https://projector.tensorflow.org/</a> </p>
+</blockquote>
+<p>从图可以看出：</p>
+<ul>
+<li><p>不同的数字还是有聚集效果，比如1集中在左边，0集中在右边;</p>
+</li>
+<li><p>不标记颜色和数字的话，所有数字集中在一起。</p>
+<blockquote>
+<p>使用t-SNE(一种非线性降维方法)基本能把这些数字分开[^t-SNE]。</p>
+</blockquote>
+</li>
+</ul>
+<p><br> <br> <br> </p>
+<p>[^智能时代]: 《智能时代》, 吴军.  第三章: 思维的革命, 小节: 熵,一种新的世界观。<br>[^PRML]: Pattern Recognition and Machine Learning, Bishop.<br>[^t-SNE]: Visualizing High-Dimensional Data Using t-SNE, 2008. First author’s blog: <a href="https://lvdmaaten.github.io/tsne/" target="_blank" rel="noopener">https://lvdmaaten.github.io/tsne/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dimension-reduction/" rel="tag"><i class="fa fa-tag"></i> dimension reduction</a>
+          
+            <a href="/tags/PCA/" rel="tag"><i class="fa fa-tag"></i> PCA</a>
+          
+            <a href="/tags/principal-component-analysis/" rel="tag"><i class="fa fa-tag"></i> principal component analysis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/04/backpropagation/" rel="next" title="反向传播算法-Backpropagation">
+                <i class="fa fa-chevron-left"></i> 反向传播算法-Backpropagation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/18/Normalization/" rel="prev" title="标准化-normalization">
+                标准化-normalization <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+	  <div>    
+		 
+		 
+		<ul class="post-copyright">
+		  <li class="post-copyright-author">
+			  <strong>本文作者：</strong>周清平, 程晨
+		  </li>
+		  <li class="post-copyright-link">
+			<strong>本文链接：</strong>
+			<a href="/2018/12/10/PCA/" title="主成分分析-principal component analysis">2018/12/10/PCA/</a>
+		  </li>
+		  <li class="post-copyright-license">
+			<strong>版权： </strong>
+			本站文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议，请勿用于商业，转载注明出处！
+		  </li>
+		</ul>
+		
+	</div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="http://ww1.sinaimg.cn/large/005F77ySly1fy1xa880boj307u09gwek.jpg" alt="周清平">
+          <p class="site-author-name" itemprop="name">周清平</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.linkedin.com/in/%E6%B8%85%E5%B9%B3-%E5%91%A8-690aa0184/" target="_blank" title="LinkedIn">
+                  
+                    <i class="fa fa-fw fa-linkedin"></i>
+                  
+                    
+                      LinkedIn
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:714781770@qq.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      Email
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhouqp631?utf8=%E2%9C%93&tab=repositories&q=&type=source&language=" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://scholar.google.com/citations?user=qTwd1aEAAAAJ&hl=zh-CN" target="_blank" title="Scholar">
+                  
+                    <i class="fa fa-fw fa-google"></i>
+                  
+                    
+                      Scholar
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses.html" title="Hung-yi Lee" target="_blank">Hung-yi Lee</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题分析"><span class="nav-number">2.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算过程"><span class="nav-number">3.</span> <span class="nav-text">计算过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#投影到一维-mathbb-R-p-Rightarrow-mathbb-R-1"><span class="nav-number">3.1.</span> <span class="nav-text">投影到一维: $\mathbb{R}^p \Rightarrow\mathbb{R}^1$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#投影到多维-mathbb-R-p-Rightarrow-mathbb-R-q-2-le-q-le-p"><span class="nav-number">3.2.</span> <span class="nav-text">投影到多维: $\mathbb{R}^p\Rightarrow\mathbb{R}^q(2\le q\le p)$</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一句话描述"><span class="nav-number">4.</span> <span class="nav-text">一句话描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化"><span class="nav-number">5.</span> <span class="nav-text">可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三维空间数据"><span class="nav-number">5.1.</span> <span class="nav-text">三维空间数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MNIST数据集"><span class="nav-number">5.2.</span> <span class="nav-text">MNIST数据集</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2018 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-globe"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">周清平</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  <!-- 代码块复制功能 -->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>
