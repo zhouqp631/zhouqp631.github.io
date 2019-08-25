@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[mac_test]]></title>
+    <url>%2F2019%2F08%2F25%2Fmac-test%2F</url>
+    <content type="text"><![CDATA[entropy zss]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[通过概率]]></title>
     <url>%2F2019%2F04%2F27%2FpassProbability%2F</url>
     <content type="text"><![CDATA[问题一共有100道题，第i道题做对的概率为p[i]，至少做对60道题为及格，求及格的概率？ 代码1234567891011121314151617181920212223def passProbability(p,thresh=60): """ f[i][j]: 前i道题至少对j道的概率 :param p: probability list [p[0],...,p[N-1]] :param thresh: 及格线做对题目个数 :return: """ N = len(p) f = [[0]*(N+1) for _ in range(N+1)] # 0道题对0道 f[0][0] = 1 # i道题对0道 for i in range(1,N+1): f[i][0] = f[i-1][0]*(1-p[i-1]) # i道题对j道 for i in range(1,N+1): for j in range(1,i+1): # 1 =&lt;j &lt;=i f[i][j] = f[i-1][j]*(1-p[i-1])+f[i-1][j-1]*p[i-1] # 及格概率 result = 0 for j in range(thresh,N+1): result += f[N][j] return result 及格概率与每道题做对概率的关系(假设每道题做对概率一样) 123456import matplotlib.pyplot as pltxs = [x*0.01 for x in range(1,100)]ys = [passProbability([x]*100) for x in xs]plt.figure()plt.plot(xs,ys)plt.show() 结果 分析转移方程 设$f[i][j]$是前i道题做对j道的概率，分如下两种情况讨论 当$j\ge1$时 前i道对j-1道，最后一道对 前i-1道对j道，最后一道错 当$j=0$时：前i-1道对0道，最后一道错 从而有$$f[i][j] = \begin{cases}f[i][j-1]p[i]+f[i-1][j](1-p[i]) \quad j\ge 1 \f[i-1][0](1-p[i])\quad j=0\end{cases}$$*边界条件** $f[0][0]=1$ $f[0][j]=0 (j\ge1)$ 及格概率 100道题对至少60道为及格，所以及格概率为$\sum_{j=1}^{60} f[100][j]​$]]></content>
