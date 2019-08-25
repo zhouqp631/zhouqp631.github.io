@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -161,7 +161,7 @@
 
 
 
-  <title>主成分分析-principal component analysis | zqp's blog</title>
+  <title>主成分分析-principal component analysis | zqp's blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -186,7 +186,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -429,38 +429,50 @@
 </ul>
 <blockquote>
 <p>$x$的(总体)均值和(总体)协方差分别用$Ex$和$Var(x)=cov(x,x)$表示。</p>
-<p>$x$的样本均值和样本协方差分别用$\bar x =\frac{1}{N}\sum_{n=1}^N x_n$和$\frac{1}{N}\sum_{n=1}^N(x_n-\bar x)(x_n-\bar x)^T$表示。</p>
+<p>$x$的样本均值和样本协方差分别用$\bar x =\frac{1}{N}\sum<em>{n=1}^N x_n$和$\frac{1}{N}\sum</em>{n=1}^N(x_n-\bar x)(x_n-\bar x)^T$表示。</p>
 </blockquote>
-<br>
-
-
-
+<p><br></p>
 <h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><p>高维空间的点，可以通过投影得到低维空间的点。</p>
 <p>考虑投影到一维空间${ ku_1|k \in \mathbb{R}，u_1 \in \mathbb{R}^p }$，我们希望投影数据能包含原始数据更多的信息。</p>
-<p><strong>信息的度量就等于不确定性的多少, 具体可以用熵(entropy)来量化, 熵越大表示信息越多</strong>[^智能时代]。</p>
+<p><strong>信息的度量就等于不确定性的多少, 具体可以用熵(entropy)来量化, 熵越大表示信息越多</strong><sup><a href="#fn_智能时代" id="reffn_智能时代">智能时代</a></sup>。</p>
 <p>假设投影数据服从正太分布 $N(\mu,\sigma^2)$, 其熵(entropy)为 $\frac{1}{2} \ln(2\pi e \sigma^2)$.</p>
 <p>从而，分布的方差$\sigma^2$越大，熵也就越大，包含的信息也就越多。</p>
 <p>所以，我们需要<strong>选择投影数据方差最大的方向</strong>$u_1$。</p>
 <blockquote>
-<p>另一种理解方式是最小化投影误差(projection error minimization)[^PRML].</p>
+<p>另一种理解方式是最小化投影误差(projection error minimization)<sup><a href="#fn_PRML" id="reffn_PRML">PRML</a></sup>.</p>
 </blockquote>
-<br>
-
-
-
+<p><br></p>
 <h1 id="计算过程"><a href="#计算过程" class="headerlink" title="计算过程"></a>计算过程</h1><p>先分析最简单的情形: 把数据投影到一维空间，然后将一维情形得到的结果推广到高维空间。</p>
 <h2 id="投影到一维-mathbb-R-p-Rightarrow-mathbb-R-1"><a href="#投影到一维-mathbb-R-p-Rightarrow-mathbb-R-1" class="headerlink" title="投影到一维: $\mathbb{R}^p \Rightarrow\mathbb{R}^1$"></a>投影到一维: $\mathbb{R}^p \Rightarrow\mathbb{R}^1$</h2><p>因为投影数据的方差只与$u_1$的方向有关，而与其大小无关。</p>
 <p>所以为了便于计算，我们限制$u_1$为单位向量，即$u_1^T u_1=1$。</p>
 <ol>
-<li><p>计算${x_1,x_2,…,x_N} $投影在$u_1$上的投影${y_1,y_2,…,y_N} $。<br>$x_n$在$u_1$上投影为:<br>$$<br>y_n = \frac{u_1^T x_n}{u_1^T u_1} = u_1^T x_n<br>$$</p>
-</li>
+<li><p>计算${x_1,x_2,…,x_N} $投影在$u_1$上的投影${y_1,y_2,…,y_N} $。<br>$x_n$在$u_1$上投影为:</p>
+<script type="math/tex; mode=display">
+y_n = \frac{u_1^T x_n}{u_1^T u_1} = u_1^T x_n</script></li>
 <li><p>计算投影数据 ${y_1,y_2,…,y_N}$的方差：</p>
-<p>$$<br>\begin{align}<br>Var(y) &amp;= E(y-Ey)^2 \<br>​    &amp;\approx \frac{1}{N}\sum_{n=1}^N(u_1^Tx_n - u_1^T \bar{x})^2 \leftarrow \bar{x}=\frac{1}{N} \sum_{n=1}^N x_n \<br>​    &amp;=\frac{1}{N}\sum_{n=1}^N (u_1^Tx_n - u_1^T \bar{x})(u_1^Tx_n - u_1^T \bar{x}) \<br>​    &amp;= \frac{1}{N}\sum_{n=1}^N (u_1^Tx_n - u_1^T \bar{x})(u_1^Tx_n - u_1^T \bar{x})^T \leftarrow a=a^T \text{ if a is a scaler} \<br>​    &amp;= u_1^T \left[ \frac{1}{N}\sum_{n=1}^N (x_n - \bar{x})(x_n -  \bar{x})^T \right]u_1  \leftarrow S=\frac{1}{N}\sum_{n=1}^N (x_n - \bar{x})(x_n -  \bar{x})^T \<br>​    &amp;=u_1^T S u_1 </p>
-<p>\end{align}<br>$$<br>上式中$S$是${x_1,x_2,…,x_N} $的样本协方差矩阵。</p>
+<script type="math/tex; mode=display">
+\begin{align} 
+Var(y) &= E(y-Ey)^2 \\
+​    &\approx \frac{1}{N}\sum_{n=1}^N(u_1^Tx_n - u_1^T \bar{x})^2 \leftarrow \bar{x}=\frac{1}{N} \sum_{n=1}^N x_n \\
+​    &=\frac{1}{N}\sum_{n=1}^N (u_1^Tx_n - u_1^T \bar{x})(u_1^Tx_n - u_1^T \bar{x}) \\
+​    &= \frac{1}{N}\sum_{n=1}^N (u_1^Tx_n - u_1^T \bar{x})(u_1^Tx_n - u_1^T \bar{x})^T \leftarrow a=a^T \text{ if a is a scaler} \\
+​    &= u_1^T \left[ \frac{1}{N}\sum_{n=1}^N (x_n - \bar{x})(x_n -  \bar{x})^T \right]u_1  \leftarrow S=\frac{1}{N}\sum_{n=1}^N (x_n - \bar{x})(x_n -  \bar{x})^T \\
+​    &=u_1^T S u_1 
+
+\end{align}</script><p>上式中$S$是${x_1,x_2,…,x_N} $的样本协方差矩阵。</p>
 </li>
 <li><p>最大化方差，求解$u_1$</p>
-<p>目标函数：<br>$$<br>\max_{u_1} \qquad  u_1^T S u_1 \</p>
-<pre><code>\quad \text{s.t.} \qquad u_1^T u_1=1</code></pre><p>$$<br>这是一个<strong>有限制条件的优化问题</strong>，可以通过<strong>拉格朗日乘子法</strong>将其转化为无约束优化问题：<br>$$<br>\max_{u_1} \quad  F(u_1)=u_1^T S u_1 +\lambda_1 (1- u_1^T u_1).$F(u_1)$取到最大值满足的条件：<br>$$<br>$F(u_1)$取到最大值满足的条件：<br>$$<br>\begin{align}<br>   \frac{\partial F(u_1) }{\partial u_1} &amp;= 2Su_1-2\lambda_1 u_1=0 \<br>   1- u_1^T u_1&amp;=0<br>\end{align}<br>$$<br>从而，解$u_1$就是$S$的最大特征值$\lambda_1$对应的特征向量。此时，$F(u_1)=\lambda_1$.</p>
+<p>目标函数：</p>
+<script type="math/tex; mode=display">
+\max_{u_1} \qquad  u_1^T S u_1 \\
+           \quad \text{s.t.} \qquad u_1^T u_1=1</script><p>这是一个<strong>有限制条件的优化问题</strong>，可以通过<strong>拉格朗日乘子法</strong>将其转化为无约束优化问题：</p>
+<script type="math/tex; mode=display">
+\max_{u_1} \quad  F(u_1)=u_1^T S u_1 +\lambda_1 (1- u_1^T u_1).$F(u_1)$取到最大值满足的条件：</script><p>$F(u_1)$取到最大值满足的条件：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+   \frac{\partial F(u_1) }{\partial u_1} &= 2Su_1-2\lambda_1 u_1=0 \\
+   1- u_1^T u_1&=0
+\end{align}</script><p>从而，解$u_1$就是$S$的最大特征值$\lambda_1$对应的特征向量。此时，$F(u_1)=\lambda_1$.</p>
 </li>
 </ol>
 <p>$u_1​$称为第一主成分(first principal component), 记为pc1。得到的一维空间 $\mathbb{R}^1 = { ku_1|k \in \mathbb{R}，u_1 \in \mathbb{R}^p }​$称为第一主子空间(first principal subspace)。</p>
@@ -482,45 +494,104 @@
 </ul>
 </blockquote>
 <p>现证明$p=M+1$时，结论仍然成立。</p>
-<p>此时，优化的目标函数为：<br>$$<br>\max_{u_{M+1}} \qquad  u_{M+1}^T S u_{M+1}<br>$$<br>约束条件($u_{M+1}^T$为单位向量且与前$M$个主成分正交)为:<br>$$<br>\begin{align}<br>u_{M+1}^T u_{M+1}&amp;=1 \quad i=1,2,…,M\<br> u_{M+1}^T u_i&amp;=0 \quad i=1,2,…,M<br> \end{align}<br>$$<br>同样，这是一个<strong>有限制条件的优化问题</strong>，可以通过<strong>拉格朗日乘子法</strong>将其转化为无约束优化问题：</p>
-<p>$$<br>\max_{u_{M+1}} \quad  F(u_{M+1})=u_{M+1}^T S u_{M+1}+\lambda_{M+1} (1- u_{M+1}^T u_{M+1})+\sum_{i=1}^M \eta_i u_{M+1}^T u_i.<br>$$<br>$F(u_{M+1})$取到最大值满足的条件：<br>$$<br>\begin{align}<br>\frac{\partial F(u_{M+1}) }{\partial u_{M+1}} &amp;= 2Su_{M+1}-2\lambda u_{M+1}+\sum_{i=1}^M \eta_i u_i =0  \tag{1}\<br>1- u_{M+1}^T u_{M+1}&amp;=0 \<br> u_{M+1}^T u_{i}&amp;=0   \quad  \text{i=1,2,…,M}<br>\end{align}<br>$$<br>在公式(1)上乘以$u_{j}^T, j \in {1,2,…,M}$, 得到:</p>
+<p>此时，优化的目标函数为：</p>
+<script type="math/tex; mode=display">
+\max_{u_{M+1}} \qquad  u_{M+1}^T S u_{M+1}</script><p>约束条件($u_{M+1}^T$为单位向量且与前$M$个主成分正交)为:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+u_{M+1}^T u_{M+1}&=1 \quad i=1,2,...,M\\
+ u_{M+1}^T u_i&=0 \quad i=1,2,...,M
+ \end{align}</script><p>同样，这是一个<strong>有限制条件的优化问题</strong>，可以通过<strong>拉格朗日乘子法</strong>将其转化为无约束优化问题：</p>
+<script type="math/tex; mode=display">
+\max_{u_{M+1}} \quad  F(u_{M+1})=u_{M+1}^T S u_{M+1}+\lambda_{M+1} (1- u_{M+1}^T u_{M+1})+\sum_{i=1}^M \eta_i u_{M+1}^T u_i.</script><p>$F(u_{M+1})$取到最大值满足的条件：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial F(u_{M+1}) }{\partial u_{M+1}} &= 2Su_{M+1}-2\lambda u_{M+1}+\sum_{i=1}^M \eta_i u_i =0  \tag{1}\\
+1- u_{M+1}^T u_{M+1}&=0 \\
+ u_{M+1}^T u_{i}&=0   \quad  \text{i=1,2,...,M}
+\end{align}</script><p>在公式(1)上乘以$u_{j}^T, j \in {1,2,…,M}$, 得到:</p>
 <blockquote>
 <ul>
-<li>$u_{j}^Tu_{M+1}=0$.</li>
-<li>$j=i$时，$ u_{j}^Tu_i = 1 $；否则$ u_{j}^Tu_i = 0$.</li>
+<li>$u<em>{j}^Tu</em>{M+1}=0$.</li>
+<li>$j=i$时，$ u<em>{j}^Tu_i = 1 $；否则$ u</em>{j}^Tu_i = 0$.</li>
 <li>$S$是样本协方差矩阵，是对称的。$S^T=S$.</li>
-<li>$u_{j}^TSu_{M+1}$ 是一个标量，所以$u_{j}^TSu_{M+1}=(u_{j}^TSu_{M+1})^T=u_{M+1}^TSu_j =\lambda_i u_{M+1}^T  u_j$.</li>
+<li>$u<em>{j}^TSu</em>{M+1}$ 是一个标量，所以$u<em>{j}^TSu</em>{M+1}=(u<em>{j}^TSu</em>{M+1})^T=u<em>{M+1}^TSu_j =\lambda_i u</em>{M+1}^T  u_j$.</li>
 </ul>
 </blockquote>
-<p>$$<br>\begin{align}<br>0&amp;=2u_{j}^TSu_{M+1}-2\lambda u_{j}^Tu_{M+1}+\sum_{i=1}^M \eta_i u_{j}^Tu_i \<br>&amp;=2u_{M+1}^TSu_j-0+\eta_j  \leftarrow Su_j=\lambda_j u_j \<br>&amp;=2\lambda_j u_{M+1}^Tu_j-0+\eta_j  \<br>&amp;= 0+\eta_j\<br>&amp;=\eta_j</p>
-<p>\end{align}<br>$$</p>
-<p>将$\eta_j=0$代入公式(1)，得到$Su_{M+1}=\lambda u_{M+1}$. </p>
-<p>因为前$M$个最大的特征值已经使用过，所以只能选择第$M+1$大的特征值$\lambda_{M+1}$及其对于的特征向量$u_{M+1}$. </p>
+<script type="math/tex; mode=display">
+\begin{align}
+0&=2u_{j}^TSu_{M+1}-2\lambda u_{j}^Tu_{M+1}+\sum_{i=1}^M \eta_i u_{j}^Tu_i \\
+&=2u_{M+1}^TSu_j-0+\eta_j  \leftarrow Su_j=\lambda_j u_j \\
+&=2\lambda_j u_{M+1}^Tu_j-0+\eta_j  \\
+&= 0+\eta_j\\
+&=\eta_j
+
+\end{align}</script><p>将$\eta<em>j=0$代入公式(1)，得到$Su</em>{M+1}=\lambda u_{M+1}$. </p>
+<p>因为前$M$个最大的特征值已经使用过，所以只能选择第$M+1$大的特征值$\lambda<em>{M+1}$及其对于的特征向量$u</em>{M+1}$. </p>
 <p>从而第$M+1$个主成分为$u_{M+1}$。</p>
-<p>$M+1$维主子空间($M+1$ dimensional principal subspace) 为$$\mathbb{R}^{M+1} = { k_1u_1+…+k_M u_M+k_{M+1}u_{M+1}|k_i \in \mathbb{R}，u_i \in \mathbb{R}^p}$$.</p>
-<p>上面使用<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95" target="_blank" rel="noopener">数学归纳法</a>证明了数据${x_1,x_2,…,x_N} , x_i \in \mathbb{R}^p$的$q$维主子空间($q$ dimensional principal subspace), 由数据的样本协方差矩阵$S=\frac{1}{N}\sum_{n=1}^N (x_n - \bar{x})(x_n -  \bar{x})^T$的前$q$个依次减小的最大特征值$\lambda_1 \ge … \ge \lambda_q$对应的特征向量$u_1,…,u_q$构成。</p>
+<p>$M+1$维主子空间($M+1$ dimensional principal subspace) 为<script type="math/tex">\mathbb{R}^{M+1} = \{ k_1u_1+...+k_M u_M+k_{M+1}u_{M+1}|k_i \in \mathbb{R}，u_i \in \mathbb{R}^p\}</script>.</p>
+<p>上面使用<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95" target="_blank" rel="noopener">数学归纳法</a>证明了数据${x<em>1,x_2,…,x_N} , x_i \in \mathbb{R}^p$的$q$维主子空间($q$ dimensional principal subspace), 由数据的样本协方差矩阵$S=\frac{1}{N}\sum</em>{n=1}^N (x_n - \bar{x})(x_n -  \bar{x})^T$的前$q$个依次减小的最大特征值$\lambda_1 \ge … \ge \lambda_q$对应的特征向量$u_1,…,u_q$构成。</p>
 <p><strong>结果</strong>：</p>
 <ul>
 <li>变换矩阵为$U^T$, 投影数据为:</li>
 </ul>
-<p>$$<br>y_i =<br>\left[<br> \begin{matrix}<br>   u_1^T x_i \<br>   \cdots \<br>   u_{q}^T x_i<br>  \end{matrix}<br>  \right]<br>  = U^Tx_i \in \mathbb{R}^q  \qquad i=1,2,…,N;<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+y_i =  
+\left[
+ \begin{matrix}
+   u_1^T x_i \\
+   \cdots \\
+   u_{q}^T x_i
+  \end{matrix}
+  \right]
+  = U^Tx_i \in \mathbb{R}^q  \qquad i=1,2,...,N;</script><ul>
 <li>$y=U^Tx$, $y$的协方差矩阵为:</li>
 </ul>
-<p>$$<br>\begin{align}<br>Var(y)&amp;=cov(y,y) = cov(U^Tx,U^Tx)  \<br>&amp;=U^Tcov(x,x)U = U^T S U\<br>&amp;=<br>\left[<br> \begin{matrix}<br>   u_1^T  \<br>   \cdots \<br>   u_{q}^T<br>  \end{matrix}<br>  \right]<br>  S<br>  \left[<br>   \begin{matrix}<br>   u_1 &amp; \cdots &amp;u_{q}<br>  \end{matrix}<br>  \right]\<br>  &amp;=<br>   \left[<br> \begin{matrix}<br>    u_1^TSu_1 &amp; \cdots &amp;  u_1^T S u_q \<br>     &amp; \cdots &amp;   \<br>     u_q^T S u_1 &amp; \cdots &amp;  u_q^T S u_q<br>  \end{matrix}<br>  \right] \<br>  &amp;=<br>     \left[<br> \begin{matrix}<br>    \lambda_1 &amp; 0 &amp;  0 \<br>     &amp; \cdots &amp;   \<br>     0 &amp; 0 &amp;  \lambda_q<br>  \end{matrix}<br>  \right].<br>\end{align}<br>$$</p>
-<br>
-
-<h1 id="一句话描述"><a href="#一句话描述" class="headerlink" title="一句话描述"></a>一句话描述</h1><p>对随机变量$x \in \mathbb{R}^p $, 寻找一个线性变换$y_{q \times 1}=W_{q\times p}x_{p \times 1}   \in \mathbb{R}^q$, 使得变换后随机变量$y$的协方差矩阵是对角阵。</p>
-<p>具体：设${x_1,x_2,…,x_N} $为来自随机变量总体$x$的样本，其样本协方差矩阵为$S=\frac{1}{N}\sum_{n=1}^N (x_n - \bar{x})(x_n -  \bar{x})^T$</p>
-<p>$S$的特征值和特征向量关系：$S_{p\times p}U_{p \times q}=U_{p \times q}\Lambda_{q \times q}$</p>
+<script type="math/tex; mode=display">
+\begin{align}
+Var(y)&=cov(y,y) = cov(U^Tx,U^Tx)  \\
+&=U^Tcov(x,x)U = U^T S U\\
+&=
+\left[
+ \begin{matrix}
+   u_1^T  \\
+   \cdots \\
+   u_{q}^T 
+  \end{matrix}
+  \right]
+  S
+  \left[
+   \begin{matrix}
+   u_1 & \cdots &u_{q} 
+  \end{matrix}
+  \right]\\
+  &=
+   \left[
+ \begin{matrix}
+    u_1^TSu_1 & \cdots &  u_1^T S u_q \\
+     & \cdots &   \\
+     u_q^T S u_1 & \cdots &  u_q^T S u_q 
+  \end{matrix}
+  \right] \\
+  &=
+     \left[
+ \begin{matrix}
+    \lambda_1 & 0 &  0 \\
+     & \cdots &   \\
+     0 & 0 &  \lambda_q 
+  \end{matrix}
+  \right].
+\end{align}</script><p><br></p>
+<h1 id="一句话描述"><a href="#一句话描述" class="headerlink" title="一句话描述"></a>一句话描述</h1><p>对随机变量$x \in \mathbb{R}^p $, 寻找一个线性变换$y<em>{q \times 1}=W</em>{q\times p}x_{p \times 1}   \in \mathbb{R}^q$, 使得变换后随机变量$y$的协方差矩阵是对角阵。</p>
+<p>具体：设${x<em>1,x_2,…,x_N} $为来自随机变量总体$x$的样本，其样本协方差矩阵为$S=\frac{1}{N}\sum</em>{n=1}^N (x_n - \bar{x})(x_n -  \bar{x})^T$</p>
+<p>$S$的特征值和特征向量关系：$S<em>{p\times p}U</em>{p \times q}=U<em>{p \times q}\Lambda</em>{q \times q}$</p>
 <p>其中</p>
 <ul>
 <li>$\Lambda$的对角元素为$S$的特征值，$\Lambda=\mathrm{diag}[\lambda_1..,\lambda_p]，\lambda_1\ge \lambda_2\ge… \lambda_p $；</li>
 <li>$U$的相应列对应于$S$的特征向量, 分别称为第一、第二…第$p$个主成分。</li>
 </ul>
 <p>此时，$W=U^T$.  即， $y=U^Tx$.</p>
-<br>
-
+<p><br></p>
 <h1 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h1><p>下面两个例子主要用来展示PCA降维的作用。</p>
 <blockquote>
 <p><a href="http://cs229.stanford.edu/syllabus.html" target="_blank" rel="noopener">CS229: Machine Learning</a>. Lecture 15-Principal Component Analysis. </p>
@@ -556,12 +627,20 @@
 </li>
 <li><p>不标记颜色和数字的话，所有数字集中在一起。</p>
 <blockquote>
-<p>使用t-SNE(一种非线性降维方法)基本能把这些数字分开[^t-SNE]。</p>
+<p>使用t-SNE(一种非线性降维方法)基本能把这些数字分开<sup><a href="#fn_t-SNE" id="reffn_t-SNE">t-SNE</a></sup>。</p>
 </blockquote>
 </li>
 </ul>
 <p><br> <br> <br> </p>
-<p>[^智能时代]: 《智能时代》, 吴军.  第三章: 思维的革命, 小节: 熵,一种新的世界观。<br>[^PRML]: Pattern Recognition and Machine Learning, Bishop.<br>[^t-SNE]: Visualizing High-Dimensional Data Using t-SNE, 2008. First author’s blog: <a href="https://lvdmaaten.github.io/tsne/" target="_blank" rel="noopener">https://lvdmaaten.github.io/tsne/</a></p>
+<blockquote id="fn_智能时代">
+<sup>智能时代</sup>. 《智能时代》, 吴军.  第三章: 思维的革命, 小节: 熵,一种新的世界观。<a href="#reffn_智能时代" title="Jump back to footnote [智能时代] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_PRML">
+<sup>PRML</sup>. Pattern Recognition and Machine Learning, Bishop.<a href="#reffn_PRML" title="Jump back to footnote [PRML] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_t-SNE">
+<sup>t-SNE</sup>. Visualizing High-Dimensional Data Using t-SNE, 2008. First author’s blog: <a href="https://lvdmaaten.github.io/tsne/" target="_blank" rel="noopener">https://lvdmaaten.github.io/tsne/</a><a href="#reffn_t-SNE" title="Jump back to footnote [t-SNE] in the text."> &#8617;</a>
+</blockquote>
 
       
     </div>
@@ -1343,6 +1422,23 @@
   
   <!-- 代码块复制功能 -->
   <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
-  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 </body>
 </html>

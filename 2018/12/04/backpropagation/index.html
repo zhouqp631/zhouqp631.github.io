@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -161,7 +161,7 @@
 
 
 
-  <title>反向传播算法-Backpropagation | zqp's blog</title>
+  <title>反向传播算法-Backpropagation | zqp's blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -186,7 +186,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -436,30 +436,20 @@
 <li>$a^{(l)}$:  激活函数的输出，称为activations</li>
 </ul>
 <p>上面的网络中，前一层的输出做线性变换后, 成为后一层的输入。 当$l=1, 2,3,….,L-1$时，值传递的关系为：</p>
-<p>\begin{aligned}<br>z^{(l+1)} &amp;= W_{n_{l+1}\times n_{l} }^{(l)} a^{(l)} + b^{(l)} \<br>a^{(l+1)} &amp;= f(z^{(l)})<br>\end{aligned}</p>
-<br>
-
-
-
-
+<p>\begin{aligned}<br>z^{(l+1)} &amp;= W<em>{n</em>{l+1}\times n_{l} }^{(l)} a^{(l)} + b^{(l)} \<br>a^{(l+1)} &amp;= f(z^{(l)})<br>\end{aligned}</p>
+<p><br></p>
 <h1 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h1><p>给定样本${(x^{(i)},y^{(i)})}_{i=1}^m$, 将模型的损失函数定义为</p>
 <p>\begin{aligned}<br>J(W,b)&amp;=J(W^{(1)},…,W^{(L-1)},b^{(1)},…,b^{(L-1)};{(x^{(i)},y^{(i)})}<em>{i=1}^m)  \<br>&amp;=\frac{1}{m}\sum</em>{i=1}^m J(W,b;x^{(i)}, y^{(i)})<br>\end{aligned}</p>
-<br>
-
-
-
-
+<p><br></p>
 <h1 id="优化方法"><a href="#优化方法" class="headerlink" title="优化方法"></a>优化方法</h1><p>参数更新的迭代公式为 ($l=1,2,…,L-1;  i=1,2,…,n_{l+1};  j=1,2,…,n_l​$)：</p>
-<p>\begin{aligned}<br>W_{ij}^{(l)} &amp;= W_{ij}^{(l)} - \alpha \frac{\partial}{\partial W_{ij}^{(l)}} J(W,b) \<br>b_{i}^{(l)} &amp;= b_{i}^{(l)} - \alpha \frac{\partial}{\partial b_{i}^{(l)}} J(W,b)<br>\end{aligned}</p>
-<p>​       其中：</p>
-<span>$$\begin{align}
+<p>\begin{aligned}<br>W<em>{ij}^{(l)} &amp;= W</em>{ij}^{(l)} - \alpha \frac{\partial}{\partial W<em>{ij}^{(l)}} J(W,b) \<br>b</em>{i}^{(l)} &amp;= b<em>{i}^{(l)} - \alpha \frac{\partial}{\partial b</em>{i}^{(l)}} J(W,b)<br>\end{aligned}</p>
+<p>​       其中：<br><span>$$\begin{align}
 \frac{\partial}{\partial W_{ij}^{(l)}} J(W,b) &amp;=  \frac{1}{m} \sum_{k=1}^m \frac{\partial}{\partial W_{ij}^{(l)}} J(W,b; x^{(k)}, y^{(k)})  \\
 \frac{\partial}{\partial b_{i}^{(l)}} J(W,b) &amp;= \frac{1}{m}\sum_{k=1}^m \frac{\partial}{\partial b_{i}^{(l)}} J(W,b; x^{(k)}, y^{(k)}) 
-\end{align}$$</span><!-- Has MathJax -->
-
+\end{align}$$</span><!-- Has MathJax --></p>
 <h2 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h2><p>如果采用随机梯度下降方法(stochastic gradient descent), 为了更新参数，需要计算每一对样本点 $(x^{(i)},y^{(i)})$的损失函数关于参数的导数。记 $(x,y)=(x^{(i)},y^{(i)})$, 上式右边求和的一项可改写为</p>
-<p>\begin{align}<br>\frac{\partial J(W,b; x, y)}{\partial W_{ij}^{(l)}} &amp; =  {\frac{\partial J(W,b; x, y)}{\partial z_i^{(l+1)} } }\frac{\partial z_i^{(l+1)} }{\partial W_{ij}^{(l)}}  = \delta_i^{(l+1)}  a^{(l)}_j<br>\end{align}</p>
-<p>\begin{align}<br>\frac{\partial J(W,b; x, y)}{\partial b_{i}^{(l)}} &amp; = \frac{\partial J(W,b; x, y)}{\partial z_i^{(l+1)}}\frac{\partial z_i^{(l+1)} }{\partial b_{i}^{(l)}} = \delta_i^{(l+1)}.<br>\end{align}</p>
+<p>\begin{align}<br>\frac{\partial J(W,b; x, y)}{\partial W<em>{ij}^{(l)}} &amp; =  {\frac{\partial J(W,b; x, y)}{\partial z_i^{(l+1)} } }\frac{\partial z_i^{(l+1)} }{\partial W</em>{ij}^{(l)}}  = \delta_i^{(l+1)}  a^{(l)}_j<br>\end{align}</p>
+<p>\begin{align}<br>\frac{\partial J(W,b; x, y)}{\partial b<em>{i}^{(l)}} &amp; = \frac{\partial J(W,b; x, y)}{\partial z_i^{(l+1)}}\frac{\partial z_i^{(l+1)} }{\partial b</em>{i}^{(l)}} = \delta_i^{(l+1)}.<br>\end{align}</p>
 <p>​     <strong>其中</strong>$\delta_i^{(l+1)}$ <strong>在BP的推导中处于核心位置</strong>，<strong>可以理解为 $l$层中节点$i$的误差</strong>(“error” of node $i$ in layer $l$) . 计算过程如下：</p>
 <ul>
 <li>$l=L$  </li>
@@ -467,22 +457,22 @@
 <p>\begin{aligned}<br>\delta^{(L)}<em>i &amp; = \frac{\partial J(W,b;x,y) }{\partial z^{(L)}_i}   = \frac{\partial}{\partial z^{(L)}_i}\frac{1}{2} \left|y -   \hat{y}\right|_2^2    \\<br>&amp;= \frac{\partial}{\partial z^{(L)}_i}\frac{1}{2} \sum</em>{j=1}^{n_L} \left(y_j-a_j^{(L)}\right)^2 \\<br>&amp;= - (y_i - a_i^{(L)}) \cdot f’(z^{(L)}_i)<br>\end{aligned}</p>
 <blockquote>
 <p> <a href="http://ufldl.stanford.edu/wiki/index.php/%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">UFLDL Tutorial: Backpropagation Algorithm</a>计算方法如上。</p>
-<p> 但是在<a href="https://zh.coursera.org/learn/machine-learning#syllabus" target="_blank" rel="noopener">Andrew Ng的Machine Learning</a>课程和书《Python Machine Learining》[^Chapter 12] 用的是$\delta_i^{(L)}=a_i^{(L)}-y_i$. </p>
+<p> 但是在<a href="https://zh.coursera.org/learn/machine-learning#syllabus" target="_blank" rel="noopener">Andrew Ng的Machine Learning</a>课程和书《Python Machine Learining》<sup><a href="#fn_Chapter 12" id="reffn_Chapter 12">Chapter 12</a></sup> 用的是$\delta_i^{(L)}=a_i^{(L)}-y_i$. </p>
 <p> 可以把$f’(z^{(L)}_i)$理解为误差的尺度参数(scale)，所以取1也可以.</p>
 </blockquote>
 <ul>
 <li>$l=L-1,L-2,…,2$    </li>
 </ul>
-<p>\begin{aligned}<br>\delta^{(l)}<em>i &amp;= \frac{\partial J(W,b;x,y) }{\partial z^{(l)}_i} \\<br>​                    &amp;=\sum</em>{j=1}^{n_{l+1}} \frac{\partial J(W,b;x,y)}{\partial z^{(l+1)}<em>j}  \frac{\partial z^{(l+1)}_j}  {\partial z^{(l)}_i}  \quad  \leftarrow  \frac{\partial J(W,b;x,y)}{\partial z^{(l+1)}_i}=\delta_i^{(l+1)  } \\<br>​    &amp;= \sum</em>{j=1}^{n_{l+1}} \left[\delta_i^{(l+1) } \frac{\partial z^{(l+1)}<em>j}  {\partial a^{(l)}_i}\frac{\partial a^{(l)}_i}  {\partial z^{(l)}_i} \right] \\<br>​    &amp;= \left[ \sum</em>{j=1}^{n_{l+1}} \delta_i^{(l+1) }  W_{ji}^{(l)}\right]f’(z_i^{(l)})<br>\end{aligned}</p>
-<br>
-
-<br>
-
-<br>
-
-
-
-<p>[^MachineLearning]: Machine Leraning, Andrew Ng<br>[^Chapter 12]: Python Machine Learining, Sebastian Raschka and Vahid Mirjalili第十二章, 书中测试的例子没有$f’(z^{(L)}_i)$. 加上$f’(z^{(L)}_i)$收敛速度训练速度变慢。</p>
+<p>\begin{aligned}<br>\delta^{(l)}<em>i &amp;= \frac{\partial J(W,b;x,y) }{\partial z^{(l)}_i} \\<br>​                    &amp;=\sum</em>{j=1}^{n<em>{l+1}} \frac{\partial J(W,b;x,y)}{\partial z^{(l+1)}_j}  \frac{\partial z^{(l+1)}_j}  {\partial z^{(l)}_i}  \quad  \leftarrow  \frac{\partial J(W,b;x,y)}{\partial z^{(l+1)}_i}=\delta_i^{(l+1)  } \\<br>​    &amp;= \sum</em>{j=1}^{n<em>{l+1}} \left[\delta_i^{(l+1) } \frac{\partial z^{(l+1)}_j}  {\partial a^{(l)}_i}\frac{\partial a^{(l)}_i}  {\partial z^{(l)}_i} \right] \\<br>​    &amp;= \left[ \sum</em>{j=1}^{n<em>{l+1}} \delta_i^{(l+1) }  W</em>{ji}^{(l)}\right]f’(z_i^{(l)})<br>\end{aligned}</p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<blockquote id="fn_MachineLearning">
+<sup>MachineLearning</sup>. Machine Leraning, Andrew Ng <a href="#reffn_MachineLearning" title="Jump back to footnote [MachineLearning] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_Chapter 12">
+<sup>Chapter 12</sup>. Python Machine Learining, Sebastian Raschka and Vahid Mirjalili第十二章, 书中测试的例子没有$f’(z^{(L)}_i)$. 加上$f’(z^{(L)}_i)$收敛速度训练速度变慢。<a href="#reffn_Chapter 12" title="Jump back to footnote [Chapter 12] in the text."> &#8617;</a>
+</blockquote>
 
       
     </div>
@@ -1260,6 +1250,23 @@
   
   <!-- 代码块复制功能 -->
   <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
-  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 </body>
 </html>
