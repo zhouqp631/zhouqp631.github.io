@@ -2,6 +2,7 @@
 layout: page
 permalink: /join/
 title: 
+description:
 nav: true
 nav_order: 5
 ---
