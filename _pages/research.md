@@ -6,9 +6,6 @@ nav: true
 nav_order: 1
 ---
 
-# research
-Some of our previous projects are summarized below.
-
 Our research is mainly about new computing methods to solve challenging inverse problems, especially nonlinear inverse problems. 
 We combine ideas from numerical analysis, Bayesian statistics, and machine learning to develop more accurate and efficient recovering algorithms. 
 We are particularly interested in
