@@ -26,6 +26,4 @@ nav_order: 4
 
 # 本科生
 - 2021-2023 : 刘志康, 材料, 毕业去向：Master in Department of Statistics, Rice University (QS 100)
-
-
 ---
