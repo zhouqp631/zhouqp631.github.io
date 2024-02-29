@@ -5,6 +5,7 @@ title: students
 description: members of the lab or group
 nav: true
 nav_order: 4
+---
 
 # 博士生
 - 2023--    : 钱嘉宇
@@ -26,4 +27,3 @@ nav_order: 4
 
 # 本科生
 - 2021-2023 : 刘志康, 材料, 毕业去向：Master in Department of Statistics, Rice University (QS 100)
----
