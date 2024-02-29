@@ -2,9 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: 
-Lecturer, School of Mathematics and Statistics,
-Central South University
+subtitle: <p>Lecturer, School of Mathematics and Statistics, <br> Central South University<p>
 profile:
   align: right
   image: zqp.jpg
