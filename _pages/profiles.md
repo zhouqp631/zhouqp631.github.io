@@ -1,5 +1,5 @@
 ---
-layout: profiles
+layout: page
 permalink: /students/
 title: students
 description: members of the lab or group
