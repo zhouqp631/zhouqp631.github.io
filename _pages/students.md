@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /students/
+title: 
 nav: true
 nav_order: 4
 ---
