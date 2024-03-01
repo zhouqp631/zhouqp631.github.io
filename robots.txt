@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://zhouqp631.github.io/zhouqp631.github.io//sitemap.xml
+Sitemap: https://zhouqp631.github.io/sitemap.xml
