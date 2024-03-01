@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: about
 permalink: /join/
 title: 
 nav: true
