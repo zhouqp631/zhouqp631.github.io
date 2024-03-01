@@ -1,3 +1,4 @@
+<!-- 
 ---
 layout: page
 permalink: /join/
@@ -20,3 +21,4 @@ nav_order: 3
 - 贝叶斯计算方法主要研究深度生成网络(deep generative models, DGM)在反问题中的应用，特别是不确定性的高效计算方法和端到端的不确定性量化方法。比如DGM先验、抽样算法、替代模型(surrogate model)和模型校正(model correction)。
 
 另外，还关注应用不确定性量化方法解决生物信息学的一些问题，建立不确定性引导的药物筛选，提高分子性质预测的准确性和泛化性。
+-->
