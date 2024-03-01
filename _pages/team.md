@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /team/
-title: team
+title:
 nav: true
 nav_order: 2
 ---
@@ -40,9 +40,8 @@ nav_order: 2
 | 2021-2024 |      |      |      |      | 王慧慧 |      |      |      | 统计学 |      |      |      |      | PhD in [School of Mathematics, King’s College London](https://www.kcl.ac.uk/mathematics) (QS 40) |      |      |      |      |
 | 2021-2024 |      |      |      |      | 许贵贤 |      |      |      | 应用统计 |      |      |      |      | PhD in [School of Mathematics, University of Birmingham](https://www.birmingham.ac.uk/schools/mathematics) (QS 84) |      |      |      |      |
 | 2021-2024 |      |      |      |      | 蔡畅   |      |      |      | 统计学   |      |      |      |      | 华为 数据分析                                                  |      |      |      |      |
-| 2020-2023 |      |      |      |      | 杨婧雅 |      |      |      | 统计学   |      |      |      |      | 同济大学 博士研究生                                            |      |      |      |      |
+| 2020-2023 |      |      |      |      | 杨婧雅 |      |      |      | 统计学   |      |      |      |      | 同济大学 生命科学与技术学院  博士研究生                                            |      |      |      |      |
 | 2020-2023 |      |      |      |      | 钱嘉宇 |      |      |      | 统计学 |      |      |      |      | 中南大学 博士研究生                                            |      |      |      |      |
-
 
 
 
