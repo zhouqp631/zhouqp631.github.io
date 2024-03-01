@@ -5,7 +5,6 @@ title:
 nav: true
 nav_order: 2
 ---
-<!-- 是页面的team部分 -->
 
 # 加入我们
 每年招收两名硕士生
