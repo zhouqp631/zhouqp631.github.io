@@ -3,12 +3,8 @@ layout: page
 permalink: /join/
 title:
 nav: true
-nav_order: 3
+nav_order: 4
 ---
-<<<<<<< HEAD
-
-=======
->>>>>>> 279f3ab77ac1342c0ed5501e4239aae903145947
 每年招收两名硕士生
 
 热烈欢迎主动性强、有成长型思维和团队合作精神的同学加入我们
