@@ -1,10 +1,9 @@
 ---
 layout: page
 permalink: /team/
-title: 
+title:
 nav: true
 nav_order: 2
-
 ---
 
 # 加入我们
