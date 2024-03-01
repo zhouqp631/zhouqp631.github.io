@@ -27,4 +27,4 @@ nav_order: 2
 
 | 入学年份  |      | 姓名  |      | 专业 |      | 毕业去向 |
 |:---------|------|:-----:|------|:----:|------|--------------------------------------------------------------:|
-| 2021-2023 |      | 刘志康 |      | 材料 |      | Master in [Department of Statistics, Rice University](https://statistics.rice.edu/) (QS 100) |
+| 2021-2023 |  <img width=50/>    | 刘志康 |      | 材料 |      | Master in [Department of Statistics, Rice University](https://statistics.rice.edu/) (QS 100) |
