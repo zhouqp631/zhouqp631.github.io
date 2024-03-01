@@ -37,7 +37,7 @@ nav_order: 2
 | 2023--   |      |      |      |      | 李孟席 |      |      |      | 应用统计   |      |      |      |      |                                                                |      |      |      |      |
 | 2022--   |      |      |      |      | 凌煜哲 |      |      |      | 统计学   |      |      |      |      |                                                                |      |      |      |      |
 | 2022--   |      |      |      |      | 李 维   |      |      |      | 统计学   |      |      |      |      |                                                                |      |      |      |      |
-| 2021-2024 |      |      |      |      | 王慧慧 |      |      |      | 统计学 |      |      |      |      | PhD Full Scholarship in [School of Mathematics, King’s College London](https://www.kcl.ac.uk/mathematics) (QS 40) |      |      |      |      |
+| 2021-2024 |      |      |      |      | 王慧慧 |      |      |      | 统计学 |      |      |      |      | PhD Full Scholarship <br>in [School of Mathematics, King’s College London](https://www.kcl.ac.uk/mathematics) (QS 40) |      |      |      |      |
 | 2021-2024 |      |      |      |      | 许贵贤 |      |      |      | 应用统计 |      |      |      |      | PhD Full Scholarship in [School of Mathematics, University of Birmingham](https://www.birmingham.ac.uk/schools/mathematics) (QS 84) |      |      |      |      |
 | 2021-2024 |      |      |      |      | 蔡畅   |      |      |      | 统计学   |      |      |      |      | 华为 数据分析                                                  |      |      |      |      |
 | 2020-2023 |      |      |      |      | 杨婧雅 |      |      |      | 统计学   |      |      |      |      | 同济大学 生命科学与技术学院  博士研究生                                            |      |      |      |      |
