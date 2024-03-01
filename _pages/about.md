@@ -18,8 +18,7 @@ Welcome to my homepage!
 
 I am currently a Lecturer at the School of Mathematics and Statistics, Central South University. I studied Mathematics and received a Bachelor's degree in 2012, along with a Master's degree in Probability Theory and Mathematical Statistics from Lanzhou University in 2015. In 2019, I obtained a Ph.D. in Mathematics from Shanghai Jiao Tong University, under the supervision of Prof. [Jinglai Li](https://lijinglai.github.io/) and Prof. [Xiaoqun Zhang](https://math.sjtu.edu.cn/faculty/xqzhang/index.html). Subsequently, from 2019 to 2020, I worked as an Algorithm Engineer at Meituan. In July 2020, I joined Central South University.
 
-Our research is mainly about new computing methods to solve challenging inverse problems, especially nonlinear inverse problems. We combine ideas from numerical analysis, Bayesian statistics, and machine learning to develop more accurate and efficient recovering algorithms. We are particularly interested in
-
+My research is concerned with finding new computational methods for solving challenging inverse problems, with a particular focus on nonlinear settings. By integrating ideas from numerical analysis, Bayesian statistics, and machine learning, I aim to develop methods that are both more accurate and more efficient. My main focus is on
 1. Bayesian scientific computing
 - physics-guided deep generative models (GAN, VAE, diffusion model) to improve accuracy, efficiency, etc.
 - goal-oriented uncertainty quantification (UQ) through the combination of both forward UQ and reverse UQ
