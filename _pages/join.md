@@ -3,7 +3,7 @@ layout: page
 permalink: /join/
 title: join
 nav: true
-nav_order: 3
+nav_order: 5
 ---
 
 
