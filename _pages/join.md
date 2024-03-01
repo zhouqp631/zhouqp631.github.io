@@ -3,7 +3,7 @@ layout: page
 permalink: /join/
 title:
 nav: true
-nav_order: 5
+nav_order: 3
 ---
 每年招收两名硕士生
 
