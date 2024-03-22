@@ -8,7 +8,7 @@ nav_order: 2
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/csu.jpg" title="Central South University New campus" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/csu.jpg" title="中南大学新校区" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
