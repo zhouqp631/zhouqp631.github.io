@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2024-03-01 15:59:00-0400
+date: 2024-01-9 12:00:00-0400
 inline: true
 related_posts: false
 ---
 
-<!-- Our paper has finally been [arxived](https://arxiv.org/pdf/2310.16102.pdf) :tada: :tada: -->
+Congratulations to Ms. Huihui Wang on being awarded a full scholarship from the School of Mathematics at the **King’s College London** to pursue a PhD in **Statistics** :tada:
