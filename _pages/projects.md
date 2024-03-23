@@ -2,10 +2,10 @@
 layout: page
 title: projects
 permalink: /projects/
-description: A growing collection of your cool projects.
+description: 
 nav: false
 nav_order: 2
-display_categories: [work, fun]
+display_categories: false
 horizontal: false
 ---
 
@@ -40,15 +40,16 @@ horizontal: false
   {%- assign sorted_projects = site.projects | sort: "importance" -%}
   <!-- Generate cards for each project -->
   {% if page.horizontal -%}
-  <div class="container">
-    <div class="row row-cols-2">
+  <div class="container-fluid">
+    <div class="col-md-12">
     {%- for project in sorted_projects -%}
       {% include projects_horizontal.html %}
     {%- endfor %}
     </div>
   </div>
   {%- else -%}
-  <div class="grid">
+  <!-- <div class="grid"> -->
+  <div class = "col-md-12">
     {%- for project in sorted_projects -%}
       {% include projects.html %}
     {%- endfor %}
