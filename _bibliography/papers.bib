@@ -5,9 +5,14 @@
   preview={surrogateForBI.jpg},
   title = {A MCMC Method Based on Surrogate Model and Gaussian Process Parameterization for Infinite Bayesian PDE Inversion},
   author = {Zheng Hu and Hongqiao Wang and Qingping Zhou},
+  keywords = {Bayesian inversion, MCMC, Gaussian process, deep learning},
   abstract = {This work focuses on an inversion problem derived from parametric partial differential equations (PDEs) with an infinite-dimensional parameter, represented as a coefficient function. The objective is to estimate this coefficient function accurately despite having only noisy measurements of the PDE solution at sparse input points. Conventional methods for inversion require numerous calls to a refined PDE solver, resulting in significant computational complexity, especially for challenging PDE problems, making the inference of the coefficient function practically infeasible. To address this issue, we propose a MCMC method that combines an deep learning-based surrogate and Gaussian process parameterization to efficiently infer the posterior of the coefficient function. The surrogate model is a combination of a cost-effective coarse PDE solver and a neural network-based transformation which provides an approximate solution derived from the refined PDE solver but based on the coarse PDE solution. The coefficient function is represented by Gaussian process with finite number of spatially dependent parameters and this parametric representation will be beneficial for the preconditioned Crank-Nicolson (pCN) Markov chain Monte Carlo method to sample efficiently from the posterior distribution. Approximate Bayesian computation method is used for constructing an informative dataset for the transformation learning. Our numerical examples demonstrate the effectiveness of this approach in accurately estimating the coefficient function while significantly reducing the computational burden associated with traditional inversion techniques.},
-  journal = {Under Review},
-  year = {2024}
+  journal = {Journal of Computational Physics},
+  pages = {112970},
+  year = {2024},
+  doi = {https://doi.org/10.1016/j.jcp.2024.112970},
+  html = {https://www.sciencedirect.com/science/article/pii/S0021999124002195},
+  selected={true}
 }
 
 @article{zhou2023deep,
@@ -49,8 +54,7 @@
   year={2024},
   publisher={De Gruyter},
   html={https://doi.org/10.1515/jiip-2023-0037},
-  pdf = {https://arxiv.org/abs/2310.15831},
-  selected={true}
+  pdf = {https://arxiv.org/abs/2310.15831}
 }
 
 @article{wang2023uncertainty,
