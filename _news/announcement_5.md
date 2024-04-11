@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Our paper on <em>Surrogate Model for Infinite Bayesian PDE Inversion </em> has been accepted for publication in J. Comput. Phys.
+Our paper on <em>Surrogate Model for Infinite Bayesian PDE Inversion </em> has been accepted for publication in Journal of Computational Physics
