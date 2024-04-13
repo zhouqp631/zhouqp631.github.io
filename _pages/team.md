@@ -25,7 +25,7 @@ nav_order: 2
 
 <br>
 
-我们是UQ-AI4Science团队(Uncertainty Quantification & Artificial Intelligence for Science Group), 致力于统计学、数学和深度学习领域的交叉研究。我们的基础技术包含MCMC采样算法、DGM先验、经典优化方法(近端梯度下降、牛顿法等)、PDE(热传导方程、Darcy flow等)。主要研究非线性反问题的数值方法和贝叶斯计算方法:
+我们是**UQ-AI4Science**团队(Uncertainty Quantification & Artificial Intelligence for Science Group), 致力于统计学、数学和深度学习领域的交叉研究。常用的基础知识包含贝叶斯统计(最大似然、MCMC采样算法等)、DGM先验、经典优化方法(正则化、近端梯度下降、牛顿法等)、PDE(热传导方程、Darcy flow等)。主要研究非线性反问题的数值方法和贝叶斯计算方法:
 - 数值方法主要探索传统优化算法和深度学习方法的有效融合，比如深度展开网络(deep unrolling networks), 分析目前融合算法的优势和不足, 提出新的算法。
   
 - 贝叶斯计算方法主要研究深度生成网络(deep generative models, DGM)在反问题中的应用，特别是不确定性的高效计算方法和实现端到端的不确定性量化方法。
