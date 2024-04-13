@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /team/
-title: team
+title: UQ-AI4Science Group
 nav: true
 nav_order: 2
 ---
