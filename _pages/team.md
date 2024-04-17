@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 permalink: /team/
 title: team
 nav: true
