@@ -19,6 +19,6 @@ We focus on developing new computational methods for uncertainty quantification 
 ## AI for Science
 - Artificial intelligence for scientific computing, e.g., [HQSNet, 2024](https://doi.org/10.1007/s10915-023-02439-4) and [DuNets-RMA, 2024](http://iopscience.iop.org/article/10.1088/1361-6420/ad35e3)
 
-- Artificial intelligence for bioinformatics, e.g., [UQ-guidedScreening, 2023](https://doi.org/10.1021/acs.jcim.3c01241)
+- Artificial intelligence for bioinformatics, e.g., [UQguidedScreening, 2023](https://doi.org/10.1021/acs.jcim.3c01241)
 
 
