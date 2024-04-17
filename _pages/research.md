@@ -8,6 +8,7 @@ nav_order: 1
 
 We focus on developing new computational methods for uncertainty quantification and scientific computing. Our work aims to design efficient, interpretable, and trustworthy algorithms for complex problems in scientific and engineering fields. To this end we use insights from numerical analysis, Bayesian statistics, and machine learning.
 
+<br>
 ## Uncertainty quantification for inverse problems
 - Bayesian(Statistical) inverse problems, e.g., [BayesianPET, 2020](https://iopscience.iop.org/article/10.1088/1361-6420/aac287) and [BayesianPDE, 2024](https://www.sciencedirect.com/science/article/pii/S0021999124002195)
 
@@ -15,7 +16,7 @@ We focus on developing new computational methods for uncertainty quantification 
 
 - UQ-guided reconstruction models incorporating physical principles (working in progress)
 
-
+<br>
 ## AI for Science
 - Artificial intelligence for scientific computing, e.g., [HQSNet, 2024](https://doi.org/10.1007/s10915-023-02439-4) and [DuNets-RMA, 2024](http://iopscience.iop.org/article/10.1088/1361-6420/ad35e3)
 
