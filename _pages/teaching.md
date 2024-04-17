@@ -3,7 +3,7 @@ layout: page
 permalink: /teaching/
 title: teaching
 nav: true
-nav_order: 5
+nav_order: 4
 ---
 
 - 非参数统计(Nonparametric statistics), undergraduate course, Fall semester, 2020-2023
