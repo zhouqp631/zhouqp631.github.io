@@ -4,7 +4,7 @@ permalink: /team/
 title: team
 nav: true
 nav_order: 3
-tags: :smile:
+tags: smile
 thumbnail: assets/img/csu.jpg
 images:
   compare: true
