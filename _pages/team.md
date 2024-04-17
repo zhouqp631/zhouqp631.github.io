@@ -4,6 +4,9 @@ permalink: /team/
 title: team
 nav: true
 nav_order: 3
+images:
+  compare: true
+  slider: true
 ---
 
 <div class="row">
