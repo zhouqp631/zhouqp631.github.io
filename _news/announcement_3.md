@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Congratulations to Mr. Guixian Xu on being awarded a full scholarship from the  School of Mathematics at **University of Birmingham** to pursue a PhD in **Applied Mathematics**  :tada:
+Congratulations to **Mr. Guixian Xu** on being awarded a full scholarship from the  School of Mathematics at **University of Birmingham** to pursue a PhD in **Applied Mathematics**  :tada:
