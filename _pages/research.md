@@ -6,7 +6,7 @@ nav: true
 nav_order: 1
 ---
 
-We focus on developing new computational methods for uncertainty quantification and scientific computing. Our work aims to design efficient, interpretable, and trustworthy algorithms for complex problems in scientific and engineering fields. To this end we use insights from numerical analysis, Bayesian statistics, and machine learning.
+We focus on developing new computational methods for uncertainty quantification and scientific computing. Our work aims to design efficient, interpretable, and trustworthy algorithms for complex problems in scientific and engineering fields. To this end we use insights from numerical analysis, Bayesian statistics, and machine learning. My research interests are in
 
 **1. Uncertainty quantification for inverse problems**
 
