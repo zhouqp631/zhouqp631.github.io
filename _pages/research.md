@@ -10,9 +10,9 @@ We focus on developing new computational methods for uncertainty quantification 
 
 **1. Uncertainty quantification for inverse problems**
 
-- Bayesian(Statistical) inverse problems, e.g., [BayesianPET, 2020](https://iopscience.iop.org/article/10.1088/1361-6420/aac287) and [BayesianPDE, 2024](https://www.sciencedirect.com/science/article/pii/S0021999124002195)
+- Bayesian (statistical) inverse problems, e.g., [BayesianPET, 2020](https://iopscience.iop.org/article/10.1088/1361-6420/aac287) and [BayesianPDE, 2024](https://www.sciencedirect.com/science/article/pii/S0021999124002195)
 
-- Development of new prior or sampling methods, e.g., [AdaptiveMCMC, 2017](https://epubs.siam.org/doi/abs/10.1137/16M1082950) and [RoundtripPrior, 2024](https://doi.org/10.1016/j.csda.2024.107930)
+- New prior or sampling methods, e.g., [AdaptiveMCMC, 2017](https://epubs.siam.org/doi/abs/10.1137/16M1082950) and [RoundtripPrior, 2024](https://doi.org/10.1016/j.csda.2024.107930)
 
 - Deep generative models for inverse problems, e.g., [DGM-EIT, 2024](https://doi.org/10.1515/jiip-2023-0037)
 
