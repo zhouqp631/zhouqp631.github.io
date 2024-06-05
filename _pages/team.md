@@ -4,7 +4,7 @@ permalink: /team/
 title: team
 nav: true
 nav_order: 3
-tags: UQ-AI4S-Group
+tags: UQ-AI4S Group
 thumbnail: assets/img/csu.jpg
 images:
   compare: true
