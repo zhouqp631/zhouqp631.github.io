@@ -3,18 +3,6 @@
 
 @string{aps = {American Physical Society,}}
 
-@article{hu2024surrogate,
-  preview={surrogateForBI.jpg},
-  title = {A MCMC Method Based on Surrogate Model and Gaussian Process Parameterization for Infinite Bayesian PDE Inversion},
-  author = {Zheng Hu and Hongqiao Wang and Qingping Zhou},
-  abstract = {This work focuses on an inversion problem derived from parametric partial differential equations (PDEs) with an infinite-dimensional parameter, represented as a coefficient function. The objective is to estimate this coefficient function accurately despite having only noisy measurements of the PDE solution at sparse input points. Conventional methods for inversion require numerous calls to a refined PDE solver, resulting in significant computational complexity, especially for challenging PDE problems, making the inference of the coefficient function practically infeasible. To address this issue, we propose a MCMC method that combines an deep learning-based surrogate and Gaussian process parameterization to efficiently infer the posterior of the coefficient function. The surrogate model is a combination of a cost-effective coarse PDE solver and a neural network-based transformation which provides an approximate solution derived from the refined PDE solver but based on the coarse PDE solution. The coefficient function is represented by Gaussian process with finite number of spatially dependent parameters and this parametric representation will be beneficial for the preconditioned Crank-Nicolson (pCN) Markov chain Monte Carlo method to sample efficiently from the posterior distribution. Approximate Bayesian computation method is used for constructing an informative dataset for the transformation learning. Our numerical examples demonstrate the effectiveness of this approach in accurately estimating the coefficient function while significantly reducing the computational burden associated with traditional inversion techniques.},
-  journal = {Journal of Computational Physics},
-  pages = {112970},
-  year = {2024},
-  doi = {https://doi.org/10.1016/j.jcp.2024.112970},
-  html = {https://www.sciencedirect.com/science/article/pii/S0021999124002195}
-}
-
 @article{zhou2023deep,
   preview={DuNets.jpg},
   title={Deep unrolling networks with recurrent momentum acceleration for nonlinear inverse problems},
@@ -26,6 +14,31 @@
   year={2024},
   pdf = {https://arxiv.org/abs/2307.16120},
   selected={true}
+}
+
+@article{wang2024comparative,
+  preview={dgmEIT.jpg},
+  title={A comparative study of variational autoencoders, normalizing flows, and score-based diffusion models for electrical impedance tomography},
+  author={Huihui Wang and Guixian Xu and Qingping Zhou},
+  abstract={Electrical Impedance Tomography (EIT) is a widely employed imaging technique in industrial inspection, geophysical prospecting, and medical imaging. However, the inherent nonlinearity and ill-posedness of EIT image reconstruction present challenges for classical regularization techniques, such as the critical selection of regularization terms and the lack of prior knowledge. Deep generative models (DGMs) have been shown to play a crucial role in learning implicit regularizers and prior knowledge. This study aims to investigate the potential of three DGMs – variational autoencoder networks, normalizing flow, and score-based diffusion model – to learn implicit regularizers in learning-based EIT imaging. We first introduce background information on EIT imaging and its inverse problem formulation. Next, we propose three algorithms for performing EIT inverse problems based on corresponding DGMs. Finally, we present numerical and visual experiments, which reveal that (1) no single method consistently outperforms the others across all settings, and (2) when reconstructing an object with two anomalies using a well-trained model based on a training dataset containing four anomalies, the conditional normalizing flow (CNF) model exhibits the best generalization in low-level noise, while the conditional score-based diffusion model (CSD*) demonstrates the best generalization in high-level noise settings. We hope our preliminary efforts will encourage other researchers to assess their DGMs in EIT and other nonlinear inverse problems.},
+  journal={Journal of Inverse and Ill-posed Problems},
+  number={0},
+  year={2024},
+  publisher={De Gruyter},
+  html={https://doi.org/10.1515/jiip-2023-0037},
+  pdf = {https://arxiv.org/abs/2310.15831}
+}
+
+@article{hu2024surrogate,
+  preview={surrogateForBI.jpg},
+  title = {A MCMC Method Based on Surrogate Model and Gaussian Process Parameterization for Infinite Bayesian PDE Inversion},
+  author = {Zheng Hu and Hongqiao Wang and Qingping Zhou},
+  abstract = {This work focuses on an inversion problem derived from parametric partial differential equations (PDEs) with an infinite-dimensional parameter, represented as a coefficient function. The objective is to estimate this coefficient function accurately despite having only noisy measurements of the PDE solution at sparse input points. Conventional methods for inversion require numerous calls to a refined PDE solver, resulting in significant computational complexity, especially for challenging PDE problems, making the inference of the coefficient function practically infeasible. To address this issue, we propose a MCMC method that combines an deep learning-based surrogate and Gaussian process parameterization to efficiently infer the posterior of the coefficient function. The surrogate model is a combination of a cost-effective coarse PDE solver and a neural network-based transformation which provides an approximate solution derived from the refined PDE solver but based on the coarse PDE solution. The coefficient function is represented by Gaussian process with finite number of spatially dependent parameters and this parametric representation will be beneficial for the preconditioned Crank-Nicolson (pCN) Markov chain Monte Carlo method to sample efficiently from the posterior distribution. Approximate Bayesian computation method is used for constructing an informative dataset for the transformation learning. Our numerical examples demonstrate the effectiveness of this approach in accurately estimating the coefficient function while significantly reducing the computational burden associated with traditional inversion techniques.},
+  journal = {Journal of Computational Physics},
+  pages = {112970},
+  year = {2024},
+  doi = {https://doi.org/10.1016/j.jcp.2024.112970},
+  html = {https://www.sciencedirect.com/science/article/pii/S0021999124002195}
 }
 
 @article{xu2024enhancing,
@@ -56,19 +69,6 @@ url = {https://www.sciencedirect.com/science/article/pii/S0167947324000148},
 author = {Jiayu Qian and Yuanyuan Liu and Jingya Yang and Qingping Zhou},
 keywords = {Bayesian inference, inverse problems, Deep generative prior, Generative adversarial network, Hamiltonian Monte Carlo},
 abstract = {Bayesian inference with deep generative prior has received considerable interest for solving imaging inverse problems in many scientific and engineering fields. The selection of the prior distribution is learned from, and therefore an important representation learning of, available prior measurements. The SA-Roundtrip, a novel deep generative prior, is introduced to enable controlled sampling generation and identify the data's intrinsic dimension. This prior incorporates a self-attention structure within a bidirectional generative adversarial network. Subsequently, Bayesian inference is applied to the posterior distribution in the low-dimensional latent space using the Hamiltonian Monte Carlo with preconditioned Crank-Nicolson (HMC-pCN) algorithm, which is proven to be ergodic under specific conditions. Experiments conducted on computed tomography (CT) reconstruction with the MNIST and TomoPhantom datasets reveal that the proposed method outperforms state-of-the-art comparisons, consistently yielding a robust and superior point estimator along with precise uncertainty quantification.}
-}
-
-article{wang2024comparative,
-  preview={dgmEIT.jpg},
-  title={A comparative study of variational autoencoders, normalizing flows, and score-based diffusion models for electrical impedance tomography},
-  author={Huihui Wang and Guixian Xu and Qingping Zhou},
-  abstract={Electrical Impedance Tomography (EIT) is a widely employed imaging technique in industrial inspection, geophysical prospecting, and medical imaging. However, the inherent nonlinearity and ill-posedness of EIT image reconstruction present challenges for classical regularization techniques, such as the critical selection of regularization terms and the lack of prior knowledge. Deep generative models (DGMs) have been shown to play a crucial role in learning implicit regularizers and prior knowledge. This study aims to investigate the potential of three DGMs – variational autoencoder networks, normalizing flow, and score-based diffusion model – to learn implicit regularizers in learning-based EIT imaging. We first introduce background information on EIT imaging and its inverse problem formulation. Next, we propose three algorithms for performing EIT inverse problems based on corresponding DGMs. Finally, we present numerical and visual experiments, which reveal that (1) no single method consistently outperforms the others across all settings, and (2) when reconstructing an object with two anomalies using a well-trained model based on a training dataset containing four anomalies, the conditional normalizing flow (CNF) model exhibits the best generalization in low-level noise, while the conditional score-based diffusion model (CSD*) demonstrates the best generalization in high-level noise settings. We hope our preliminary efforts will encourage other researchers to assess their DGMs in EIT and other nonlinear inverse problems.},
-  journal={Journal of Inverse and Ill-posed Problems},
-  number={0},
-  year={2024},
-  publisher={De Gruyter},
-  html={https://doi.org/10.1515/jiip-2023-0037},
-  pdf = {https://arxiv.org/abs/2310.15831}
 }
 
 @article{wang2023uncertainty,
