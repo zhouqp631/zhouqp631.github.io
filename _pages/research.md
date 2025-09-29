@@ -11,7 +11,7 @@ We develop new computational methods for uncertainty quantification and scientif
 
 
 # Reviewers
-statistics and computing,
+Statistics and Computing,
 Journal of Computational and Applied Mathematics, IEEE Transactions on Computational Imaging, IEEE Transactions on Signal Processing, 
 Neural Networks
 
