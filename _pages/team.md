@@ -32,7 +32,7 @@ images:
 我们是**UQ-AI4Science**团队(Uncertainty Quantification & Artificial Intelligence for Science Group),  致力于统计学、数学和深度学习领域的交叉研究。我们的研究建立在贝叶斯统计(最大似然、MCMC采样等)、深度生成模型、正则化、优化(近端梯度下降、牛顿法等)、偏微分方程(热传导方程、Darcy flow等)的理论基础上。
 研究内容有：
 
-1. **(非)线性反问题求解**
+**1. (非)线性反问题求解**
 
 - 基于扩散概率模型(diffusion probabilistic models)的反问题求解模型及高效算法
   
@@ -40,7 +40,8 @@ images:
   
 - 物理嵌入/驱动/感知的深度学习模型
 
-2. **跨学科应用**
+
+**2. 跨学科应用**
    
 - 探索不确定性量化方法在生物信息学等领域的实际应用 
 
