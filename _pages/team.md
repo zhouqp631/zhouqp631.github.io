@@ -71,8 +71,8 @@ images:
 |   2022-2025   |      |      |   凌煜哲  |      |      |   统计学   |      |      |         东南大学 数学学院  博士研究生                                                 |      |      |      岑秀丽           |
 |   2023-2025 |      |      |   李  维   |      |      |   统计学   |      |      |          广东省 公务员                                                     |      |      |      彭君      |
 |            |      |      |           |      |      |            |      |      |                                                                |      |      |                  |
-| 2021-2024  |      |      |   王慧慧  |      |      |   统计学   |      |      | PhD with a Full Scholarship <br> in Statistics at [King’s College London](https://www.kcl.ac.uk/mathematics) (QS 40) |      |      |     戴斌祥     |
-| 2021-2024  |      |      |   许贵贤  |      |      |  应用统计  |      |      | PhD with a Full Scholarship <br> in Applied Mathematics at [ University of Birmingham](https://www.birmingham.ac.uk/schools/mathematics) (QS 84) |      |      |      彭君      |
+| 2021-2024  |      |      |   王慧慧  |      |      |   统计学   |      |      | PhD with a Full Scholarship <br> in Statistics at [King’s College London](https://www.kcl.ac.uk/mathematics)  |      |      |     戴斌祥     |
+| 2021-2024  |      |      |   许贵贤  |      |      |  应用统计  |      |      | PhD with a Full Scholarship <br> in Applied Mathematics at [ University of Birmingham](https://www.birmingham.ac.uk/schools/mathematics)  |      |      |      彭君      |
 | 2021-2024  |      |      |   蔡 畅    |      |      |   统计学   |      |      |                  华为 数据开发                          |      |      |      彭君      |
 |            |      |      |           |      |      |            |      |      |                                                                |      |      |                  |
 | 2020-2023  |      |      |   杨婧雅  |      |      |   统计学   |      |      |   同济大学 生命科学与技术学院  博士研究生         |      |      |     牛原玲     |
@@ -85,7 +85,7 @@ images:
 
 |   |     |     |     |     | 姓名  |     |     |     |     | 专业 |     |     |     |     | 毕业去向 |     |     |     |     |
 |:---------|------|------|------|------|:-----|------|------|------|------|:----|------|------|------|------|:--------------------------------------------------------------:|------|------|------|------|
-| 2021-2023 |   |     |     |     | 刘志康 |      |     |     |     | 材料科学与工程 |      |     |     |     | Master in [Department of Statistics,  Rice University](https://statistics.rice.edu/) (QS 100) |     |     |     |     |
+| 2021-2023 |   |     |     |     | 刘志康 |      |     |     |     | 材料科学与工程 |      |     |     |     | Master in [Department of Statistics,  Rice University](https://statistics.rice.edu/)  |     |     |     |     |
 
 <br>
 
