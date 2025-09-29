@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <p>Lecturer, School of Mathematics and Statistics <br> <a href="https://www.csu.edu.cn/">Central South University</a> <p>
+subtitle: <p> Associate Professor, School of Mathematics and Statistics <br> <a href="https://www.csu.edu.cn/">Central South University</a> <p>
 profile:
   align: right
   image: zqp.jpg
