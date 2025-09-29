@@ -33,7 +33,7 @@ images:
 
 **1. (非)线性反问题求解**
 
-- 基于扩散概率模型(diffusion probabilistic models)的反问题求解模型及高效算法
+- 基于扩散概率模型(diffusion probabilistic models)的反问题求解
   
 - 贝叶斯反演中的先验设计与MCMC采样方法
   
