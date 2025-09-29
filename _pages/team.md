@@ -29,8 +29,7 @@ images:
 
 <br>
 
-我们是**UQ-AI4Science**团队(Uncertainty Quantification & Artificial Intelligence for Science Group),  致力于统计学、数学和深度学习领域的交叉研究。我们的研究建立在贝叶斯统计(最大似然、MCMC采样等)、深度生成模型、正则化、优化(近端梯度下降、牛顿法等)、偏微分方程(热传导方程、Darcy flow等)的理论基础上。
-研究内容有：
+我们是**UQ-AI4Science**团队(Uncertainty Quantification & Artificial Intelligence for Science Group),  致力于统计学、数学和深度学习领域的交叉研究。我们的研究建立在贝叶斯统计(最大似然、MCMC采样等)、深度生成模型、正则化、优化(近端梯度下降、牛顿法等)、偏微分方程(热传导方程、Darcy flow等)的理论基础上。研究内容有：
 
 **1. (非)线性反问题求解**
 
