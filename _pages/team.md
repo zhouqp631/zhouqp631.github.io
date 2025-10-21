@@ -24,7 +24,7 @@ images:
 <div style="height: 10px;"></div>
 2026年招收2名硕士生，欢迎各位同学加入
 
-要求编程能力强(`Python, Pytorch, Matlab`)、勤奋踏实、立志从事前沿科学研究
+要求编程能力强(`Python, Pytorch, Matlab`)、主动性强、立志从事前沿科学研究
 
 
 <br>
