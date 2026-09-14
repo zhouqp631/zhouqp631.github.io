@@ -13,6 +13,7 @@ images:
 
 <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/csu.jpg" title="中南大学新校区" class="img-fluid rounded z-depth-1" %}</swiper-slide>
+  <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/2026_postgraduate.jpg" title="2026届毕业生(从左到右: 许孟婕 李孟席 许佳乐 徐瑶)" class="img-fluid rounded z-depth-1" %}</swiper-slide>
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/2025_postgraduate.jpg" title="2025届毕业生(从左到右: 李维 凌煜哲)" class="img-fluid rounded z-depth-1" %}</swiper-slide>
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/2024_postgraduate.jpg" title="2024届毕业生(从左到右: 许贵贤 蔡畅 王慧慧)" class="img-fluid rounded z-depth-1" %}</swiper-slide>
   <swiper-slide>{% include figure.liquid loading="eager" path="assets/img/2023_postgraduate.jpg" title="2023届毕业生(从左到右: 杨婧雅 钱嘉宇)" class="img-fluid rounded z-depth-1" %}</swiper-slide>
@@ -26,7 +27,7 @@ images:
 2027年计划招收2-4名硕士生，要求勤奋踏实、主动性强、具备一定的编程基础、立志从事前沿科学研究。
 
 课题组致力于统计学、数学和深度学习领域的交叉研究。欢迎对贝叶斯统计建模、深度生成模型、科学机器学习等相关研究方向感兴趣的学生参加推免或报考。
-有意向的同学请将简历发送至~~qpzhou@csu.edu.cn
+有意向的同学请将简历发送至 qpzhou@csu.edu.cn
 
 <br>
 
