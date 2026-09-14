@@ -14,6 +14,7 @@ uncertainty quantification, deep generative models, Bayesian inverse problems, s
  
 ## Reviewers
 Statistics and Computing,
-Journal of Computational and Applied Mathematics, IEEE Transactions on Computational Imaging, IEEE Transactions on Signal Processing, 
+Journal of Computational and Applied Mathematics, Journal of Computational Physics,
+IEEE Transactions on Computational Imaging, IEEE Transactions on Signal Processing, 
 Neural Networks
 
