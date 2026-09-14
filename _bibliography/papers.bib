@@ -3,23 +3,13 @@
 
 @string{aps = {American Physical Society,}}
 
-
-@article{ke2024gibbsbps,
-  preview={dp-sgs.jpg},
-  title={Split Gibbs diffusion posterior sampling for nonlinear inverse problems with application to electrical impedance tomography},
-  author={Yuzhe Ling and Xiongwen Ke and Huihui Wang and Qingping Zhou},
-  abstract={Diffusion models have become particularly prominent for generating high-quality samples. Consequently, they have become widely adopted for modeling priors in image reconstruction. However, integrating diffusion priors into nonlinear inverse problems presents significant computational challenges, primarily due to the inherent complexity of nonlinear forward operators. This work presents a new approach for incorporating a diffusion prior into the split Gibbs sampler, denoted as DP-SGS, to sample from the posterior distribution in nonlinear settings. DP-SGS simplifies the complex posterior sampling problem by introducing an auxiliary variable that decomposes it into two simple conditional distributions: a forward model that handles the likelihood term and a prior model implicitly determined by the pre-trained diffusion model.Both conditional distributions are efficiently approximated as Gaussian distributions using first-order Taylor expansion for the prior model and Laplace approximation for the forward model, thereby ensuring computational tractability despite the nonlinear forward operator.Experiments on the challenging electrical impedance tomography (EIT) imaging problem demonstrate that our method enhances solution accuracy while achieving rapid convergence rates, confirming its effectiveness for solving nonlinear inverse problems.},
-  year={2025},
+@article{liu2026bayesian,
+  preview={BayesFactor.jpg},
+  title={Bayesian factorization via L<sub>1/2</sub>  shrinkage},
+  author={Shicheng Liu and  Qingping Zhou and  Yanan Fan and Xiongwen Ke},
+  arxiv = {2409.07874},
+  year={2026},
   selected={true}
-}
-
-@article{wang2025sequential,
-  preview={sbd-df.jpg},
-  title={Sequential Bayesian Design for Efficient Surrogate Construction in the Inversion of Darcy Flows},
-  author={Hongji Wang and Hongqiao Wang and Jinyong Ying and Qingping Zhou},
-  abstract={Inverse problems governed by partial differential equations (PDEs) play a crucial role in various fields, including computational science, image processing, and engineering. Particularly, Darcy flow equation is a fundamental equation in fluid mechanics, which plays a crucial role in understanding fluid flow through porous media. Bayesian methods provide an effective approach for solving PDEs inverse problems, while their numerical implementation requires numerous evaluations of computationally expensive forward solvers. Therefore, the adoption of surrogate models with lower computational costs is essential. However, constructing a globally accurate surrogate model for high-dimensional complex problems demands high model capacity and large amounts of data. To address this challenge, this study proposes an efficient locally accurate surrogate that focuses on the high-probability regions of the true likelihood in inverse problems, with relatively low model complexity and few training data requirements. Additionally, we introduce a sequential Bayesian design strategy to acquire the proposed surrogate since the high-probability region of the likelihood is unknown. The strategy treats the posterior evolution process of sequential Bayesian design as a Gaussian process, enabling algorithmic acceleration through one-step ahead prior. The complete algorithmic framework is referred to as Sequential Bayesian design for locally accurate surrogate (SBD-LAS). Finally, three experiments based the Darcy flow equation demonstrate the advantages of the proposed method in terms of both inversion accuracy and computational speed.},
-  year={2025},
-  arxiv={2507.17713}
 }
 
 @article{ke2024gibbsbps,
@@ -27,10 +17,41 @@
   title={Fused L<sub>1/2</sub> prior for large scale linear inverse problem with Gibbs bouncy particle sampler},
   author={Xiongwen Ke and Yanan Fan and Qingping Zhou},
   abstract={In this paper, we study Bayesian approach for solving large scale linear inverse problems arising in various scientific and engineering fields. We propose a fused L<sub>1/2</sub> prior with edge-preserving and sparsity-promoting properties and show that it can be formulated as a Gaussian mixture Markov random field. Since the density function of this family of prior is neither log-concave nor Lipschitz, gradient-based Markov chain Monte Carlo methods can not be applied to sample the posterior. Thus, we present a Gibbs sampler in which all the conditional posteriors involved have closed form expressions. The Gibbs sampler works well for small size problems but it is computationally intractable for large scale problems due to the need for sample high dimensional Gaussian distribution. To reduce the computation burden, we construct a Gibbs bouncy particle sampler (Gibbs-BPS) based on a piecewise deterministic Markov process. This new sampler combines elements of Gibbs sampler with bouncy particle sampler and its computation complexity is an order of magnitude smaller. We show that the new sampler converges to the target distribution. With computed tomography examples, we demonstrate that the proposed method shows competitive performance with existing popular Bayesian methods and is highly efficient in large scale problems.},
-  year={2024},
+  journal={Inverse Problems},
+  year={2026},
   arxiv = {2409.07874},
   selected={true}
 }
+
+@article{qian2026atomic,
+  preview={AUINet.jpg},
+  title={Atomic Uncertainty Pinpoints Critical Failure Structures for Trustworthy Molecular Property Prediction},
+  author={Jiayu Qian and Yukun Luo and Qingping Zhou and Xiaoqing Guan},
+  journal={Journal of Chemical Information and Modeling},
+  year={2026},
+  publisher={ACS Publications},
+  selected={true}
+}
+
+@article{ke2024gibbsbps,
+  preview={dp-sgs.jpg},
+  title={Split Gibbs diffusion posterior sampling for nonlinear inverse problems with application to electrical impedance tomography},
+  author={Yuzhe Ling and Xiongwen Ke and Huihui Wang and Qingping Zhou},
+  abstract={Diffusion models have become particularly prominent for generating high-quality samples. Consequently, they have become widely adopted for modeling priors in image reconstruction. However, integrating diffusion priors into nonlinear inverse problems presents significant computational challenges, primarily due to the inherent complexity of nonlinear forward operators. This work presents a new approach for incorporating a diffusion prior into the split Gibbs sampler, denoted as DP-SGS, to sample from the posterior distribution in nonlinear settings. DP-SGS simplifies the complex posterior sampling problem by introducing an auxiliary variable that decomposes it into two simple conditional distributions: a forward model that handles the likelihood term and a prior model implicitly determined by the pre-trained diffusion model.Both conditional distributions are efficiently approximated as Gaussian distributions using first-order Taylor expansion for the prior model and Laplace approximation for the forward model, thereby ensuring computational tractability despite the nonlinear forward operator.Experiments on the challenging electrical impedance tomography (EIT) imaging problem demonstrate that our method enhances solution accuracy while achieving rapid convergence rates, confirming its effectiveness for solving nonlinear inverse problems.},
+  year={2025}
+}
+
+@article{wang2025sequential,
+  preview={sbd-df.jpg},
+  title={Sequential Bayesian Design for Efficient Surrogate Construction in the Inversion of Darcy Flows},
+  author={Hongji Wang and Hongqiao Wang and Jinyong Ying and Qingping Zhou},
+  abstract={Inverse problems governed by partial differential equations (PDEs) play a crucial role in various fields, including computational science, image processing, and engineering. Particularly, Darcy flow equation is a fundamental equation in fluid mechanics, which plays a crucial role in understanding fluid flow through porous media. Bayesian methods provide an effective approach for solving PDEs inverse problems, while their numerical implementation requires numerous evaluations of computationally expensive forward solvers. Therefore, the adoption of surrogate models with lower computational costs is essential. However, constructing a globally accurate surrogate model for high-dimensional complex problems demands high model capacity and large amounts of data. To address this challenge, this study proposes an efficient locally accurate surrogate that focuses on the high-probability regions of the true likelihood in inverse problems, with relatively low model complexity and few training data requirements. Additionally, we introduce a sequential Bayesian design strategy to acquire the proposed surrogate since the high-probability region of the likelihood is unknown. The strategy treats the posterior evolution process of sequential Bayesian design as a Gaussian process, enabling algorithmic acceleration through one-step ahead prior. The complete algorithmic framework is referred to as Sequential Bayesian design for locally accurate surrogate (SBD-LAS). Finally, three experiments based the Darcy flow equation demonstrate the advantages of the proposed method in terms of both inversion accuracy and computational speed.},
+  arxiv={2507.17713},
+  journal={Journal of Computational Physics},
+  year={2026},
+  publisher={Elsevier}
+}
+
 
 @article{zhou2023deep,
   preview={DuNets.jpg},
@@ -41,8 +62,7 @@
   html={http://iopscience.iop.org/article/10.1088/1361-6420/ad35e3},
   slides={DuNets_slides.pdf},
   year={2024},
-  pdf = {https://arxiv.org/abs/2307.16120},
-  selected={true}
+  pdf = {https://arxiv.org/abs/2307.16120}
 }
 
 @article{wang2024comparative,
